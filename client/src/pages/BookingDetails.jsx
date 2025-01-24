@@ -12,10 +12,12 @@ function BookingDetails() {
     axios
       .get(`http://localhost:8000/bookings/get-booking-by-id/${bookingId}`)
       .then((res) => {
+        console.log(res.data);
         setDetails(res.data.booking); // Store booking details
       })
       .catch((err) => {
         console.error("Error fetching booking details:", err);
+        alert("Failed to fetch booking details. Please try again later.");
       });
   }, [bookingId]);
 
@@ -53,9 +55,14 @@ function BookingDetails() {
       printWindow.print(); // Trigger the print dialog after the content has loaded
     };
   };
+
   return (
     <Layout>
-      <div className="container w-75" id="print-section">
+      <div
+        className="container w-75"
+        id="print-section"
+        style={{ marginTop: "-1rem" }}
+      >
         <h2 className="text-center mb-4">Your Booking is Confirmed!</h2>
         {details ? (
           <div>
@@ -128,15 +135,19 @@ function BookingDetails() {
                       <strong>Price per Night:</strong> ₹{details.room_id.price}
                     </p>
                     <p>
-                      <strong>Status:</strong>{" "}
+                      <strong>Room Status: </strong>
                       <span
-                        className={`badge ${
-                          details.status === "Confirmed"
+                        className={`badge fs-6 px-3 py-2 ${
+                          details.room_id.status === "Available"
                             ? "bg-success"
-                            : "bg-warning text-dark"
+                            : details.room_id.status === "Reserved"
+                            ? "bg-warning text-dark"
+                            : details.room_id.status === "Booked"
+                            ? "bg-success"
+                            : "bg-secondary"
                         }`}
                       >
-                        {details.status}
+                        {details.room_id.status}
                       </span>
                     </p>
                   </div>
@@ -158,14 +169,39 @@ function BookingDetails() {
                       {new Date(details.check_out_date).toLocaleDateString()}
                     </p>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6 ">
                     <p>
-                      <strong>Total Price:</strong> ₹{details.price}
+                      <strong>Booking Date :</strong>{" "}
+                      {new Date(details.createdAt).toLocaleDateString()}
                     </p>
                     <p>
-                      <strong>Booking Date & Time:</strong>{" "}
-                      {new Date(details.createdAt).toLocaleDateString()} at{" "}
+                      <strong>Booking Time :</strong>{" "}
                       {new Date(details.createdAt).toLocaleTimeString()}
+                    </p>
+                  </div>
+
+                  {/* displaying the price and booking status seperately */}
+
+                  <div className="col-md-6 mt-1">
+                    <p>
+                      <strong>Total Price: </strong>
+                      <span className="badge bg-success fs-6 px-3 py-2">
+                        ₹{details.price}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="col-md-6 mt-1">
+                    <p>
+                      <strong> Booking Status:</strong>{" "}
+                      <span
+                        className={`badge fs-6 px-3 py-2 ${
+                          details.status === "confirmed"
+                            ? "bg-success"
+                            : "bg-warning text-dark"
+                        }`}
+                      >
+                        {details.status}
+                      </span>
                     </p>
                   </div>
                 </div>

@@ -15,6 +15,11 @@ const createBooking = async (req, res) => {
       return res.status(404).json({ message: "Room not found" });
     }
 
+    if (room.status === "Maintenance" || room.status === "Reserved" || room.status === "Booked") {
+      return res.status(400).json({ message: "This room is currently unavailable for booking." });
+   }
+   
+
     // Fetch the customer details using the authenticated user's ID
     const customerId = req.user._id; // The authenticated user's ID is in req.user._id
     const customer = await CustomerModel.findOne({ user_id: customerId });
@@ -41,6 +46,10 @@ const createBooking = async (req, res) => {
     console.log(booking);
     // Save the booking to the database
     await booking.save();
+
+    // Update the room's status to "Reserved"
+    room.status = "Reserved";
+    await room.save();
 
     res.status(201).json({
       message: "Booking created successfully",
@@ -102,7 +111,7 @@ const getBookingById = async (req, res) => {
       .populate("customer_id", "name email")
       .populate(
         "room_id",
-        "hotel_name room_number room_type price address Ratings"
+        "hotel_name room_number room_type price address Ratings status"
       )
       .populate({
         path: "customer_id", // Populate customer details
@@ -159,10 +168,27 @@ const confirmBooking = async (req, res) => {
       return res.status(400).json({ message: "Booking is already confirmed" });
     }
 
+    // Fetch the room associated with the booking
+    const room = await RoomModel.findById(booking.room_id);
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+
+    // Check if the room is in "Reserved" status
+    if (room.status !== "Reserved") {
+      return res.status(400).json({
+        message: "Room status must be 'Reserved' to confirm the booking",
+      });
+    }
+
     booking.status = "confirmed";
     await booking.save();
 
-    console.log(booking); // checking the status after confirming.
+    // Update the room status to "Booked"
+    room.status = "Booked";
+    await room.save();
+
+    console.log(booking, room); // checking the status after confirming.
 
     res.status(200).json({
       message: "Booking confirmed successfully",

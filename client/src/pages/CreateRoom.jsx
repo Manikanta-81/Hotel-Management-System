@@ -149,12 +149,11 @@ function CreateRoom() {
               value={status} // Bind the selected value to the 'status' state
               onChange={(event) => setStatus(event.target.value)} // Update the state when an option is selected
             >
-              <option value="" disabled>
-                Select the room status
-              </option>
-              <option value="Available">Available</option>
-              <option value="Booked">Booked</option>
-              <option value="Maintenance">Maintenance</option>
+                <option value="">Select the room status</option>
+                <option value="Available">Available</option>
+                {/* <option value="Reserved">Reserved</option> */}
+                {/* <option value="Booked">Booked</option> */}
+                <option value="Maintenance">Maintenance</option>
             </select>
 
             {/* Ratings  */}

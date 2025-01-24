@@ -30,7 +30,7 @@ const createRoom = async (req, res) => {
       room_number,
       room_type,
       price,
-      status,
+      status:"Available",
       image,
       Ratings,
     });

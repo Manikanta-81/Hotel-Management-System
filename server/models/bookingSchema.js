@@ -15,10 +15,18 @@ const bookingSchema = mongoose.Schema(
     check_in_date: {
       type: Date,
       required: true,
+      validate: {
+        validator: function (value) {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0); // Ensure comparison starts at the beginning of the day
+          return value >= today; // Check-in must be today or later
+        },
+        message: "Check-in date must not be in the past.",
+      },
     },
     check_out_date: {
       type: Date,
-      required: true, 
+      required: true,
       validate: {
         validator: function (value) {
           return value > this.check_in_date;

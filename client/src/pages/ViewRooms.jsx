@@ -26,7 +26,7 @@ function ViewRooms() {
   }, []);
 
   function handleRoomClick(room) {
-    if (room.status === "Booked" || room.status === "Maintenance") {
+    if (room.status === "Booked" || room.status === "Maintenance" || room.status ==="Reserved") {
       // alert(`Room is under ${room.status}. Please select another room.`);
       toast.info(`Room is under ${room.status}. Please select another room.`, {
         theme: "dark",

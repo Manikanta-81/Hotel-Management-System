@@ -14,10 +14,12 @@ function ConfirmBooking() {
     axios
       .get(`http://localhost:8000/bookings/get-booking-by-id/${bookingId}`)
       .then((res) => {
+        console.log(res.data);
         setBookingDetails(res.data.booking); // Store booking details
       })
       .catch((err) => {
         console.error("Error fetching booking details:", err);
+        alert("Failed to fetch booking details. Please try again later.");
       });
   }, [bookingId]);
 
@@ -35,18 +37,21 @@ function ConfirmBooking() {
     }
 
     axios
-      .put(`http://localhost:8000/bookings/confirm-booking/${bookingId}`, null,{
-        headers: {
-          Authorization: `Bearer ${token}`, // Include token in headers
-        },
-      })
+      .put(
+        `http://localhost:8000/bookings/confirm-booking/${bookingId}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include token in headers
+          },
+        }
+      )
       .then((res) => {
         // Check for status codes and handle the response accordingly
         if (res.status === 404) {
           alert("Booking not found.");
         } else if (res.status === 400) {
           alert("Booking is already confirmed.");
-
         } else {
           console.log(res);
           console.log(res.data); // This will contain the success message and booking details
@@ -127,20 +132,9 @@ function ConfirmBooking() {
                 <div className="row">
                   <div className="col-md-6">
                     <p className="card-text">
-                      <strong>Total Price:</strong> ₹{bookingDetails.price}
-                    </p>
-                  </div>
-                  <div className="col-md-6">
-                    <p className="card-text">
-                      <strong>Status:</strong>{" "}
-                      <span
-                        className={`badge ${
-                          bookingDetails.status === "Confirmed"
-                            ? "bg-success"
-                            : "bg-warning text-dark"
-                        }`}
-                      >
-                        {bookingDetails.status}
+                      <strong>Total Price:</strong>{" "}
+                      <span className="badge bg-primary fs-6  text-light">
+                        ₹{bookingDetails.price}
                       </span>
                     </p>
                   </div>
@@ -183,6 +177,49 @@ function ConfirmBooking() {
                         {new Date(
                           bookingDetails.customer_id.dob
                         ).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
+
+                <div className="mt-4">
+                  <h3 className="card-title fw-light text-primary mb-3 fs-4">
+                    Room & Booking Status
+                  </h3>
+                  <div className="row">
+                    <div className="col-md-6 mt-2">
+                      <p className="card-text">
+                        <strong>Room Status: </strong>
+                        <span
+                          className={`badge fs-6 ${
+                            bookingDetails.room_id.status === "Available"
+                              ? "bg-success"
+                              : bookingDetails.room_id.status === "Reserved"
+                              ? "bg-warning text-dark"
+                              : bookingDetails.room_id.status === "Booked"
+                              ? "bg-success"
+                              : "bg-secondary"
+                          }`}
+                        >
+                          {bookingDetails.room_id.status}
+                        </span>
+                      </p>
+                    </div>
+
+                    <div className="col-md-6 mt-2">
+                      <p className="card-text">
+                        <strong> Booking Status:</strong>{" "}
+                        <span
+                          className={`badge fs-6 ${
+                            bookingDetails.status === "confirmed"
+                              ? "bg-success"
+                              : "bg-warning text-dark"
+                          }`}
+                        >
+                          {bookingDetails.status}
+                        </span>
                       </p>
                     </div>
                   </div>
