@@ -45,7 +45,7 @@ function Feedback() {
 
     // Send data to the backend
     axios
-      .post("http://localhost:8000/feedback/add-feedback", formObj)
+      .post("http://localhost:80/feedback/add-feedback", formObj)
       .then((res) => {
         console.log(res);
         alert("Feedback submitted successfully");

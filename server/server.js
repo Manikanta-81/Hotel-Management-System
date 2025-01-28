@@ -47,9 +47,9 @@ app.use("/bookings", bookingRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/contact", contactRoutes);
 
-const PORT = 8000;
+const PORT = 80;
 app.listen(PORT, () => {
-  console.log("Server is listening on port ", 8000);
-  console.log(`http://localhost:8000`);
+  console.log("Server is listening on port ", 80);
+  console.log(`http://localhost:80`);
   connect();
 });

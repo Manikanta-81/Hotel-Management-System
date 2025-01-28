@@ -76,7 +76,7 @@ const getAllBookings = async (req, res) => {
   try {
     const bookings = await BookingModel.find()
       .populate("customer_id", "name email") // Populate customer details only
-      .populate("room_id", "hotel_name room_number type price") // Populate room details (room_number, type, price)
+      .populate("room_id", "hotel_name room_number type price status") // Populate room details (room_number, type, price)
       .populate({
         path: "customer_id", // Populate user details from the customer
         select: "user_id", // Only get the user_id from the customer

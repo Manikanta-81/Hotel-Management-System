@@ -29,7 +29,7 @@ function CreateRoom() {
     console.log(formObj);
 
     axios
-      .post("http://localhost:8000/rooms/create-room", formObj)
+      .post("http://localhost:80/rooms/create-room", formObj)
       .then((res) => {
         console.log(res);
         alert("Room Added successfully");

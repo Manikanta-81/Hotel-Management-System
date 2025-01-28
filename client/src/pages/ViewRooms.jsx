@@ -11,7 +11,7 @@ function ViewRooms() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/rooms/get-all-rooms")
+      .get("http://localhost:80/rooms/get-all-rooms")
 
       .then((res) => {
         console.log(res);

@@ -12,7 +12,7 @@ function ConfirmBooking() {
   // Fetch booking details using the booking ID when the component mounts
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/bookings/get-booking-by-id/${bookingId}`)
+      .get(`http://localhost:80/bookings/get-booking-by-id/${bookingId}`)
       .then((res) => {
         console.log(res.data);
         setBookingDetails(res.data.booking); // Store booking details
@@ -38,7 +38,7 @@ function ConfirmBooking() {
 
     axios
       .put(
-        `http://localhost:8000/bookings/confirm-booking/${bookingId}`,
+        `http://localhost:80/bookings/confirm-booking/${bookingId}`,
         null,
         {
           headers: {

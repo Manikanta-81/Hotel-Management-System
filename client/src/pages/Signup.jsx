@@ -46,7 +46,7 @@ function Signup() {
     }
 
     axios
-      .post("http://localhost:8000/users/register-user", formObj)
+      .post("http://localhost:80/users/register-user", formObj)
 
       .then((res) => {
         console.log(res);

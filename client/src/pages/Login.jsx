@@ -16,7 +16,7 @@ function Login() {
     console.log(formObj);
 
     axios
-      .post("http://localhost:8000/users/login-user", formObj)
+      .post("http://localhost:80/users/login-user", formObj)
 
       .then((res) => {
         console.log(res);

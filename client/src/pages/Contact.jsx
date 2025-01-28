@@ -32,7 +32,7 @@ const Contact = () => {
     console.log(formObj);
 
     axios
-      .post("http://localhost:8000/contact/savecontact", formObj)
+      .post("http://localhost:80/contact/savecontact", formObj)
       .then((res) => {
         console.log(res);
         toast.success("Your Message has been sent successfully!");

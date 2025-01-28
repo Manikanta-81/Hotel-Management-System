@@ -15,7 +15,7 @@ function RoomBooking() {
   // Fetch room details using room ID when the component mounts
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/rooms/getSingleRoom/${roomId}`)
+      .get(`http://localhost:80/rooms/getSingleRoom/${roomId}`)
       .then((res) => {
         setRoomDetails(res.data.room); // Store the room details in state
       })
@@ -63,7 +63,7 @@ function RoomBooking() {
 
     // Create booking using the booking data
     axios
-      .post("http://localhost:8000/bookings/create-booking", bookingData, {
+      .post("http://localhost:80/bookings/create-booking", bookingData, {
         headers: {
           Authorization: `Bearer ${token}`, // Include token in headers
         },

@@ -54,7 +54,7 @@ function Customer() {
     }
 
     axios
-      .post("http://localhost:8000/customers/create-customer", formObj, {
+      .post("http://localhost:80/customers/create-customer", formObj, {
         headers: {
           Authorization: `Bearer ${token}`, // Include token in headers
         },
