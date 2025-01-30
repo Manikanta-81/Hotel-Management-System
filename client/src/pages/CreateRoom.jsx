@@ -13,6 +13,7 @@ function CreateRoom() {
   const [image, setImage] = useState("");
   const [Ratings, setRatings] = useState("");
   const navigate = useNavigate();
+  const [success, setSuccess] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -33,8 +34,9 @@ function CreateRoom() {
       .then((res) => {
         console.log(res);
         alert("Room Added successfully");
-        alert("Redirecting to the Home page, kindly log out");
-        setTimeout(() => navigate("/"), 2000);
+        setSuccess(true);
+        // alert("Redirecting to the Home page, kindly log out");
+        // setTimeout(() => navigate("/"), 2000);
       })
       .catch((error) => {
         console.log("Error", error);
@@ -62,6 +64,7 @@ function CreateRoom() {
                 className="form-control"
                 placeholder="Enter the Hotel Name"
                 required
+                value={hotel_name}
                 onChange={(event) => setHotel_name(event.target.value)}
               />
             </div>
@@ -76,6 +79,7 @@ function CreateRoom() {
                 className="form-control"
                 placeholder="Enter the Hotel Name"
                 required
+                value={address}
                 onChange={(event) => setAddress(event.target.value)}
               />
             </div>
@@ -90,6 +94,7 @@ function CreateRoom() {
                 id="room_number"
                 className="form-control"
                 placeholder="Enter the Room number of the hotel"
+                value={room_number}
                 onChange={(event) => {
                   setRoom_number(event.target.value);
                 }}
@@ -132,6 +137,7 @@ function CreateRoom() {
                 id="price"
                 className="form-control"
                 placeholder="Enter the Room Price"
+                value={price}
                 onChange={(event) => {
                   setPrice(event.target.value);
                 }}
@@ -149,11 +155,11 @@ function CreateRoom() {
               value={status} // Bind the selected value to the 'status' state
               onChange={(event) => setStatus(event.target.value)} // Update the state when an option is selected
             >
-                <option value="">Select the room status</option>
-                <option value="Available">Available</option>
-                {/* <option value="Reserved">Reserved</option> */}
-                {/* <option value="Booked">Booked</option> */}
-                <option value="Maintenance">Maintenance</option>
+              <option value="">Select the room status</option>
+              <option value="Available">Available</option>
+              {/* <option value="Reserved">Reserved</option> */}
+              {/* <option value="Booked">Booked</option> */}
+              <option value="Maintenance">Maintenance</option>
             </select>
 
             {/* Ratings  */}
@@ -167,6 +173,7 @@ function CreateRoom() {
                 className="form-control"
                 placeholder="Select the Ratings of the Room"
                 required
+                value={Ratings}
                 onChange={(event) => {
                   setRatings(event.target.value);
                 }}
@@ -193,6 +200,36 @@ function CreateRoom() {
                 className="btn btn-primary p-3 m-3  rounded-4 "
               />
             </div>
+
+            {success && (
+              <div className="text-center mt-3">
+                <button
+                  className="btn btn-success m-2"
+                  onClick={() => {
+                    setHotel_name("");
+                    setAddress("");
+                    setRoom_number("");
+                    setRoomType("");
+                    setPrice("");
+                    setStatus("");
+                    setImage("");
+                    setRatings("");
+                    setSuccess(false);
+                  }}
+                >
+                  Add Another Room
+                </button>
+                <button
+                  className="btn btn-secondary m-2"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    navigate("/");
+                  }}
+                >
+                  Go to Home
+                </button>
+              </div>
+            )}
           </form>
         </div>
       </Layout>
