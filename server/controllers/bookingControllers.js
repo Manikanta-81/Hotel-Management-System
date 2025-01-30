@@ -49,6 +49,7 @@ const createBooking = async (req, res) => {
 
     // Update the room's status to "Reserved"
     room.status = "Reserved";
+    room.reservedAt = new Date();   //dynamically add reserved time along with date
     await room.save();
 
     res.status(201).json({

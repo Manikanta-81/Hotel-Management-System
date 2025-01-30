@@ -53,7 +53,7 @@ const createRoom = async (req, res) => {
 const getAllRooms = async (req, res) => {
   try {
     const rooms = await Room.find();
-    console.log(rooms);
+    // console.log(rooms);
 
     if (rooms.length === 0) {
       return res.status(404).json({ message: "No rooms found" });

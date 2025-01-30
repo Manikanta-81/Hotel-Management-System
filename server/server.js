@@ -34,6 +34,11 @@ app.use(cors());
 // used to parse json requests
 app.use(bodyparser.json());
 
+
+// Cron job to release reserved rooms
+require("./cronJobs/releaseReservedRooms"); // Import your cron job file
+
+
 app.get("/", (req, res) => {
   //   res.send("Server is working");
   res.send("Welcome to Hotel Management System and server is working  ");

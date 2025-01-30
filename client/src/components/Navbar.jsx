@@ -78,11 +78,11 @@ function Navbar() {
                       Login
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <Link className="nav-link" to="/signup">
                       Sign up
                     </Link>
-                  </li>
+                  </li> */}
                 </>
               )}
               {/* <li className="nav-item">

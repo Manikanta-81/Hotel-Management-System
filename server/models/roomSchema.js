@@ -31,7 +31,7 @@ const roomSchema = new mongoose.Schema(
 
     status: {
       type: String, // Store string values
-      enum: ["Available", "Reserved", "Booked", "Maintenance"], 
+      enum: ["Available", "Reserved", "Booked", "Maintenance"],
       default: "Available", // Default to "Available"
     },
 
@@ -43,6 +43,10 @@ const roomSchema = new mongoose.Schema(
     Ratings: {
       type: Number,
       required: true,
+    },
+    reservedAt: {
+      type: Date, // Stores the timestamp when the room was reserved
+      default: null,
     },
   },
   { timestamps: true } // Automatically adds createdAt and updatedAt fields
