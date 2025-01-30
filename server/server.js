@@ -36,7 +36,7 @@ app.use(bodyparser.json());
 
 app.get("/", (req, res) => {
   //   res.send("Server is working");
-  res.send("Welcome to Hotel Management Syste and server is working  ");
+  res.send("Welcome to Hotel Management System and server is working  ");
 });
 
 //call  Routes(root url)

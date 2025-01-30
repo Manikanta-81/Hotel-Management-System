@@ -8,6 +8,10 @@ import { toast, ToastContainer } from "react-toastify";
 function ViewRooms() {
   const [rooms, setRooms] = useState([]);
   const navigate = useNavigate();
+  const [filteredRooms, setFilteredRooms] = useState([]);
+  const [availabilityFilter, setAvailabilityFilter] = useState("All");
+  const [priceSort, setPriceSort] = useState(""); // For price sorting
+  const [ratingsSort, setRatingsSort] = useState(""); // For ratings sorting
 
   useEffect(() => {
     axios
@@ -18,6 +22,7 @@ function ViewRooms() {
         // toast.success(res.data.message);
         alert(res.data.message);
         setRooms(res.data.rooms);
+        setFilteredRooms(res.data.rooms); // Initialize filteredRooms with all rooms
       })
       .catch((err) => {
         toast.error("Failed to fetch rooms. Please try again.");
@@ -25,8 +30,36 @@ function ViewRooms() {
       });
   }, []);
 
+  useEffect(() => {
+    let updatedRooms = [...rooms]; // Copy the original rooms array
+
+    // Apply Availability Filter
+    if (availabilityFilter === "Available") {
+      updatedRooms = updatedRooms.filter((room) => room.status === "Available");
+    }
+
+    //  Apply Price Sorting
+    if (priceSort === "low-to-high") {
+      updatedRooms.sort((a, b) => a.price - b.price);
+    } else if (priceSort === "high-to-low") {
+      updatedRooms.sort((a, b) => b.price - a.price);
+    }
+
+    if (ratingsSort !== "") {
+      const minRating = parseInt(ratingsSort, 10); // Convert to number
+      updatedRooms = updatedRooms.filter((room) => room.Ratings >= minRating);
+    }
+
+    //  Update filteredRooms state
+    setFilteredRooms(updatedRooms);
+  }, [availabilityFilter, priceSort, ratingsSort, rooms]);
+
   function handleRoomClick(room) {
-    if (room.status === "Booked" || room.status === "Maintenance" || room.status ==="Reserved") {
+    if (
+      room.status === "Booked" ||
+      room.status === "Maintenance" ||
+      room.status === "Reserved"
+    ) {
       // alert(`Room is under ${room.status}. Please select another room.`);
       toast.info(`Room is under ${room.status}. Please select another room.`, {
         theme: "dark",
@@ -44,7 +77,7 @@ function ViewRooms() {
     return (
       <div className="container py-4">
         <div className="row g-4">
-          {rooms.map((room) => (
+          {filteredRooms.map((room) => (
             <div key={room._id} className="col-12 col-sm-6 col-md-4">
               <div className="card h-100">
                 <div className="card-body">
@@ -103,6 +136,50 @@ function ViewRooms() {
           {" "}
           Book your room in the Available hotels.
         </h3>
+
+        <div className="container py-4">
+        <div className="row g-4 ">
+          <div className="col-12 col-sm-6 col-md-4">
+            <label className="fw-semibold mb-1">Sort by Availability:</label>
+            <select
+              className="form-select"
+              value={availabilityFilter}
+              onChange={(e) => setAvailabilityFilter(e.target.value)}
+            >
+              <option value="All">All Rooms</option>
+              <option value="Available">Available Rooms</option>
+            </select>
+          </div>
+
+          <div className="col-12 col-sm-6 col-md-4 ">
+            <label className="fw-semibold mb-1">Sort by Price:</label>
+            <select
+              className="form-select"
+              value={priceSort}
+              onChange={(e) => setPriceSort(e.target.value)}
+            >
+              <option value="">None</option>
+              <option value="low-to-high">Low to High</option>
+              <option value="high-to-low">High to Low</option>
+            </select>
+          </div>
+
+          <div className="col-12 col-sm-6 col-md-4 ">
+            <label className="fw-semibold mb-1">Sort by Ratings:</label>
+            <select
+              className="form-select"
+              value={ratingsSort}
+              onChange={(e) => setRatingsSort(e.target.value)}
+            >
+              <option value="">All</option>
+              <option value="3">3 & above</option>
+              <option value="4">4 & above</option>
+              <option value="5">5 stars only</option>
+            </select>
+          </div>
+        </div>
+        </div>
+
         {/* fetch the data from the data into diplay/view rooms page  */}
         <div className="d-flex m-2">{displayRooms()}</div>
       </Layout>

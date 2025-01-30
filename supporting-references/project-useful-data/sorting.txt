@@ -1,0 +1,174 @@
+import React, { useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function ViewRooms() {
+  const [rooms, setRooms] = useState([]);
+  const [filteredRooms, setFilteredRooms] = useState([]);
+  const [availabilityFilter, setAvailabilityFilter] = useState("");
+  const [sortByPrice, setSortByPrice] = useState("");
+  const [ratingFilter, setRatingFilter] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:80/rooms/get-all-rooms")
+      .then((res) => {
+        setRooms(res.data.rooms);
+        setFilteredRooms(res.data.rooms);
+      })
+      .catch((err) => {
+        toast.error("Failed to fetch rooms. Please try again.");
+      });
+  }, []);
+
+  // Handle Room Click
+  function handleRoomClick(room) {
+    if (room.status !== "Available") {
+      toast.info(`Room is under ${room.status}. Please select another room.`, {
+        theme: "dark",
+      });
+    } else {
+      toast.success("The selected room is available", { theme: "dark" });
+      setTimeout(() => {
+        navigate(`/viewrooms/booking/${room._id}`);
+      }, 1500);
+    }
+  }
+
+  // Filtering and Sorting Logic
+  useEffect(() => {
+    let updatedRooms = [...rooms];
+
+    // Filter by Availability
+    if (availabilityFilter === "available") {
+      updatedRooms = updatedRooms.filter((room) => room.status === "Available");
+    }
+
+
+    // Filter by Ratings
+    if (ratingFilter) {
+      updatedRooms = updatedRooms.filter((room) => room.Ratings >= parseFloat(ratingFilter));
+    }
+
+    // Sort by Price
+    if (sortByPrice === "low-to-high") {
+      updatedRooms.sort((a, b) => a.price - b.price);
+    } else if (sortByPrice === "high-to-low") {
+      updatedRooms.sort((a, b) => b.price - a.price);
+    }
+
+    setFilteredRooms(updatedRooms);
+  }, [availabilityFilter, sortByPrice, hotelFilter, ratingFilter, rooms]);
+
+  return (
+    <div>
+      <Layout>
+        <h3 className="fw-semibold text-center text-success p-2 fw-light">
+          Book your room in the Available hotels.
+        </h3>
+
+        {/* Filter and Sort Options */}
+        <div className="container my-3">
+          <div className="row g-3">
+            {/* Filter by Availability */}
+            <div className="col-md-3">
+              <select
+                className="form-select"
+                onChange={(e) => setAvailabilityFilter(e.target.value)}
+              >
+                <option value="">All Rooms</option>
+                <option value="available">Available Only</option>
+              </select>
+            </div>
+
+            {/* Sort by Price */}
+            <div className="col-md-3">
+              <select
+                className="form-select"
+                onChange={(e) => setSortByPrice(e.target.value)}
+              >
+                <option value="">Sort by Price</option>
+                <option value="low-to-high">Low to High</option>
+                <option value="high-to-low">High to Low</option>
+              </select>
+            </div>
+
+            {/* Filter by Ratings */}
+            <div className="col-md-3">
+              <select
+                className="form-select"
+                onChange={(e) => setRatingFilter(e.target.value)}
+              >
+                <option value="">Filter by Ratings</option>
+                <option value="3">3 & above</option>
+                <option value="4">4 & above</option>
+                <option value="5">5 stars only</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Display Filtered Rooms */}
+        <div className="container py-4">
+          <div className="row g-4">
+            {filteredRooms.length > 0 ? (
+              filteredRooms.map((room) => (
+                <div key={room._id} className="col-12 col-sm-6 col-md-4">
+                  <div className="card h-100">
+                    <div className="card-body">
+                      <h2 className="card-title fw-light">{room.hotel_name}</h2>
+                      <p className="card-text">
+                        <strong>Address:</strong> {room.address}
+                      </p>
+                      <p className="card-text">
+                        <strong>Room Number:</strong> {room.room_number}
+                      </p>
+                      <p className="card-text">
+                        <strong>Type:</strong> {room.room_type}
+                      </p>
+                      <p className="card-text">
+                        <strong>Price:</strong> ₹{room.price} / night
+                      </p>
+                      <p className="card-text">
+                        <strong>Status:</strong>{" "}
+                        <span
+                          className={`badge ${
+                            room.status === "Available" ? "bg-success" : "bg-danger"
+                          }`}
+                        >
+                          {room.status}
+                        </span>
+                      </p>
+                      <p className="card-text">
+                        <strong>Ratings:</strong>{" "}
+                        {room.Ratings ? `${room.Ratings}/5` : "Not Rated"}
+                      </p>
+                    </div>
+                    <div className="card-footer text-center">
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => handleRoomClick(room)}
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-danger">No rooms found.</p>
+            )}
+          </div>
+        </div>
+      </Layout>
+      <ToastContainer position="top-center" autoClose={3000} />
+    </div>
+  );
+}
+
+export default ViewRooms;
