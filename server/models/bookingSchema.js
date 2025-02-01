@@ -40,7 +40,7 @@ const bookingSchema = mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "confirmed"],
+      enum: ["pending", "confirmed", "checkedOut"],
       default: "pending", // Initially set to pending when booking is created
     },
   },

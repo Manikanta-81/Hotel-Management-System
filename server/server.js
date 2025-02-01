@@ -17,7 +17,7 @@ const customerRoutes = require("./routes/customerRoutes");
 const roomRoutes = require("./routes/roomRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
-const contactRoutes= require("./routes/contactRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
 const connect = () => {
   try {
@@ -34,10 +34,9 @@ app.use(cors());
 // used to parse json requests
 app.use(bodyparser.json());
 
-
 // Cron job to release reserved rooms
-require("./cronJobs/releaseReservedRooms"); // Import your cron job file
-
+require("./cronJobs/releaseReservedRooms"); // Import your cron  job file
+require("./cronJobs/checkoutRooms"); // Import your checkout (cron) job file
 
 app.get("/", (req, res) => {
   //   res.send("Server is working");

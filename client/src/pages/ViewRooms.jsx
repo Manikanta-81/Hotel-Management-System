@@ -37,6 +37,13 @@ function ViewRooms() {
     if (availabilityFilter === "Available") {
       updatedRooms = updatedRooms.filter((room) => room.status === "Available");
     }
+    if (availabilityFilter === "Booked") {
+      updatedRooms = updatedRooms.filter((room) => room.status === "Booked");
+    }
+
+    if(availabilityFilter ==="Maintenance"){
+      updatedRooms = updatedRooms.filter((room) => room.status === "Maintenance");
+    }
 
     //  Apply Price Sorting
     if (priceSort === "low-to-high") {
@@ -138,46 +145,48 @@ function ViewRooms() {
         </h3>
 
         <div className="container py-4">
-        <div className="row g-4 ">
-          <div className="col-12 col-sm-6 col-md-4">
-            <label className="fw-semibold mb-1">Sort by Availability:</label>
-            <select
-              className="form-select"
-              value={availabilityFilter}
-              onChange={(e) => setAvailabilityFilter(e.target.value)}
-            >
-              <option value="All">All Rooms</option>
-              <option value="Available">Available Rooms</option>
-            </select>
-          </div>
+          <div className="row g-4 ">
+            <div className="col-12 col-sm-6 col-md-4">
+              <label className="fw-semibold mb-1">Sort by Availability:</label>
+              <select
+                className="form-select"
+                value={availabilityFilter}
+                onChange={(e) => setAvailabilityFilter(e.target.value)}
+              >
+                <option value="All">All Rooms</option>
+                <option value="Available">Available Rooms</option>
+                <option value="Booked">Booked Rooms</option>
+                <option value="Maintenance">Rooms under Maintenance</option>
+              </select>
+            </div>
 
-          <div className="col-12 col-sm-6 col-md-4 ">
-            <label className="fw-semibold mb-1">Sort by Price:</label>
-            <select
-              className="form-select"
-              value={priceSort}
-              onChange={(e) => setPriceSort(e.target.value)}
-            >
-              <option value="">None</option>
-              <option value="low-to-high">Low to High</option>
-              <option value="high-to-low">High to Low</option>
-            </select>
-          </div>
+            <div className="col-12 col-sm-6 col-md-4 ">
+              <label className="fw-semibold mb-1">Sort by Price:</label>
+              <select
+                className="form-select"
+                value={priceSort}
+                onChange={(e) => setPriceSort(e.target.value)}
+              >
+                <option value="">None</option>
+                <option value="low-to-high">Low to High</option>
+                <option value="high-to-low">High to Low</option>
+              </select>
+            </div>
 
-          <div className="col-12 col-sm-6 col-md-4 ">
-            <label className="fw-semibold mb-1">Sort by Ratings:</label>
-            <select
-              className="form-select"
-              value={ratingsSort}
-              onChange={(e) => setRatingsSort(e.target.value)}
-            >
-              <option value="">All</option>
-              <option value="3">3 & above</option>
-              <option value="4">4 & above</option>
-              <option value="5">5 stars only</option>
-            </select>
+            <div className="col-12 col-sm-6 col-md-4 ">
+              <label className="fw-semibold mb-1">Sort by Ratings:</label>
+              <select
+                className="form-select"
+                value={ratingsSort}
+                onChange={(e) => setRatingsSort(e.target.value)}
+              >
+                <option value="">All</option>
+                <option value="3">3 & above</option>
+                <option value="4">4 & above</option>
+                <option value="5">5 stars only</option>
+              </select>
+            </div>
           </div>
-        </div>
         </div>
 
         {/* fetch the data from the data into diplay/view rooms page  */}
