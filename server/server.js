@@ -19,9 +19,9 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 
-const connect = () => {
+const connect = async () => {
   try {
-    mongoose.connect("mongodb://localhost:27017/HotelManagement");
+    await mongoose.connect("mongodb+srv://Balajis1812:balaji123!@cluster0.xeoxr.mongodb.net/Hotel_Booking_System");
     console.log("Connected to Database of MongoDB");
   } catch {
     console.log(err.message);
