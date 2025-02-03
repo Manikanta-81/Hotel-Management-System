@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
+import axiosInstance from "../utils/axiosInstance";
 
 function BookingDetails() {
   const { bookingId } = useParams(); // Get booking ID from the route params
@@ -9,8 +9,8 @@ function BookingDetails() {
 
   // Fetch booking details using the booking ID when the component mounts
   useEffect(() => {
-    axios
-      .get(`http://localhost:80/bookings/get-booking-by-id/${bookingId}`)
+    axiosInstance
+      .get(`/bookings/get-booking-by-id/${bookingId}`)
       .then((res) => {
         console.log(res.data);
         setDetails(res.data.booking); // Store booking details

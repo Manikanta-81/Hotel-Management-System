@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa"; // Importing a star icon from react-icons
+import axiosInstance from "../utils/axiosInstance";
 
 function Feedback() {
   const { bookingId } = useParams();
@@ -44,8 +44,8 @@ function Feedback() {
     console.log(formObj);
 
     // Send data to the backend
-    axios
-      .post("http://localhost:80/feedback/add-feedback", formObj)
+    axiosInstance
+      .post("/feedback/add-feedback", formObj)
       .then((res) => {
         console.log(res);
         alert("Feedback submitted successfully");

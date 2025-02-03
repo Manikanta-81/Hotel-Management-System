@@ -29,7 +29,7 @@ const bookingSchema = mongoose.Schema(
       required: true,
       validate: {
         validator: function (value) {
-          return value > this.check_in_date;
+          return value >= this.check_in_date;
         },
         message: "Check-out date must be later than check-in date.",
       },

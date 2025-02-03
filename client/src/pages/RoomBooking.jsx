@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import axiosInstance from "../utils/axiosInstance";
 
 function RoomBooking() {
   const { roomId } = useParams(); // Get room ID from the route params
@@ -14,8 +14,8 @@ function RoomBooking() {
 
   // Fetch room details using room ID when the component mounts
   useEffect(() => {
-    axios
-      .get(`http://localhost:80/rooms/getSingleRoom/${roomId}`)
+    axiosInstance
+      .get(`/rooms/getSingleRoom/${roomId}`)
       .then((res) => {
         setRoomDetails(res.data.room); // Store the room details in state
       })
@@ -62,8 +62,8 @@ function RoomBooking() {
     }
 
     // Create booking using the booking data
-    axios
-      .post("http://localhost:80/bookings/create-booking", bookingData, {
+    axiosInstance
+      .post("/bookings/create-booking", bookingData, {
         headers: {
           Authorization: `Bearer ${token}`, // Include token in headers
         },

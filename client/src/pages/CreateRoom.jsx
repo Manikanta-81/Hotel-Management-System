@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axiosInstance";
 
 function CreateRoom() {
   const [hotel_name, setHotel_name] = useState("");
@@ -29,8 +29,8 @@ function CreateRoom() {
     };
     console.log(formObj);
 
-    axios
-      .post("http://localhost:80/rooms/create-room", formObj)
+    axiosInstance
+      .post("/rooms/create-room", formObj)
       .then((res) => {
         console.log(res);
         alert("Room Added successfully");

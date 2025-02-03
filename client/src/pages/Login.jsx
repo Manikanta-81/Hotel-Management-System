@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
+// import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import axiosInstance from "../utils/axiosInstance";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,8 +16,8 @@ function Login() {
     const formObj = { email, password };
     console.log(formObj);
 
-    axios
-      .post("http://localhost:80/users/login-user", formObj)
+    axiosInstance
+      .post("/users/login-user", formObj)
 
       .then((res) => {
         console.log(res);

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
+import axiosInstance from "../utils/axiosInstance";
 
 function ViewRooms() {
   const [rooms, setRooms] = useState([]);
@@ -14,8 +14,8 @@ function ViewRooms() {
   const [ratingsSort, setRatingsSort] = useState(""); // For ratings sorting
 
   useEffect(() => {
-    axios
-      .get("http://localhost:80/rooms/get-all-rooms")
+    axiosInstance
+      .get("/rooms/get-all-rooms")
 
       .then((res) => {
         console.log(res);

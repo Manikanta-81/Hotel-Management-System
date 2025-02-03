@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import axiosInstance from "../utils/axiosInstance";
 
 function Customer() {
   const [gender, setGender] = useState("");
@@ -53,8 +53,8 @@ function Customer() {
       return;
     }
 
-    axios
-      .post("http://localhost:80/customers/create-customer", formObj, {
+    axiosInstance
+      .post("/customers/create-customer", formObj, {
         headers: {
           Authorization: `Bearer ${token}`, // Include token in headers
         },

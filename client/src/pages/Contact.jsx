@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
 import "../styles/Contact.css";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import axiosInstance from "../utils/axiosInstance";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -31,8 +31,8 @@ const Contact = () => {
 
     console.log(formObj);
 
-    axios
-      .post("http://localhost:80/contact/savecontact", formObj)
+    axiosInstance
+      .post("/contact/savecontact", formObj)
       .then((res) => {
         console.log(res);
         toast.success("Your Message has been sent successfully!");

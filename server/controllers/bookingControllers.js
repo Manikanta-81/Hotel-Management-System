@@ -29,8 +29,7 @@ const createBooking = async (req, res) => {
     }
 
     // Calculate the price based on check-in and check-out dates
-    const nights =
-      (new Date(check_out_date) - new Date(check_in_date)) / (1000 * 3600 * 24); // Calculate number of nights
+    const nights =  Math.max(1,(new Date(check_out_date) - new Date(check_in_date)) / (1000 * 3600 * 24)); // Calculate number of nights
     const price = room.price * nights;
 
     // Create the booking

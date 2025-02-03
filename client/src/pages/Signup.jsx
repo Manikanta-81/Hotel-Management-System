@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../utils/axiosInstance";
 // import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function Signup() {
@@ -45,8 +45,8 @@ function Signup() {
       return;
     }
 
-    axios
-      .post("http://localhost:80/users/register-user", formObj)
+    axiosInstance
+      .post("/users/register-user", formObj)
 
       .then((res) => {
         console.log(res);
