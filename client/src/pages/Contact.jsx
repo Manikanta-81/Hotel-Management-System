@@ -35,13 +35,17 @@ const Contact = () => {
       .post("/contact/savecontact", formObj)
       .then((res) => {
         console.log(res);
-        toast.success("Your Message has been sent successfully!");
+        // toast.success("Your Message has been sent successfully!");
 
         // Reset the form fields
         setName("");
         setEmail("");
         setPhone("");
         setMessage("");
+        setTimeout(() => {
+          toast.success("Your Message has been sent successfully!");
+        }, 500);
+
       })
       .catch((error) => {
         console.log("Error", error);

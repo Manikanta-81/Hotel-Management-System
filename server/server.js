@@ -10,6 +10,16 @@ const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const cors = require("cors");
 
+
+const path = require("path");
+// const https = require("https"); // Import the HTTPS module
+// const fs = require("fs"); // Import the File System module
+
+// app.use(express.json());
+const buildpath = path.join(__dirname, "../client/build");
+app.use(express.static(buildpath));
+console.log(__dirname);
+
 //import routes
 
 const userRoutes = require("./routes/userRoutes");
@@ -21,10 +31,10 @@ const contactRoutes = require("./routes/contactRoutes");
 
 const connect = async () => {
   try {
-    await mongoose.connect("mongodb+srv://Balajis1812:balaji123!@cluster0.xeoxr.mongodb.net/Hotel_Booking_System");
+    await mongoose.connect(process.env.MONGODB_URL);
     console.log("Connected to Database of MongoDB");
-  } catch {
-    console.log(err.message);
+  } catch(err) {
+    console.log("Error connecting to MongoDB:", err.message);
   }
 };
 
@@ -53,7 +63,7 @@ app.use("/contact", contactRoutes);
 
 const PORT = 80;
 app.listen(PORT, () => {
-  console.log("Server is listening on port ", 80);
+  console.log("Server is listening on port", PORT);
   console.log(`http://localhost:80`);
   connect();
 });
