@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 function Navbar() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token"); // Check if the token exists
+  const token = localStorage.getItem("token"); 
 
   const handleLogout = () => {
     if (token) {

@@ -46,7 +46,7 @@ function Footer() {
                 <i className="bi bi-instagram fs-5"></i>
               </a>
               <a
-                href="mailto:your-stayhub@example.com" // Replace with your Gmail or email
+                href="mailto:your-stayhub@example.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white"
