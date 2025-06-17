@@ -1,0 +1,75 @@
+
+### Step-by-Step Guide: Recovering from Folder Directory Rename Without `git mv` Command
+
+#### Scenario:
+You renamed a folder (e.g., `hotel-management-system` to `client`) locally but did not use the `git mv` command. As a result, Git tracks these changes as deletions and additions of files, which can clutter the commit history when you push.
+
+#### What You Need to Do:
+
+1. **Check the status of your changes:**
+   - Run the following command to see the files that have been modified, deleted, or renamed.
+   
+   ```bash
+   git status
+   ```
+
+2. **Reset the last commit:**
+   - To undo the last commit but leave the changes in your working directory, use the `git reset` command:
+   
+   ```bash
+   git reset HEAD~1
+   ```
+
+3. **Move the directory back to its original name (optional):**
+   - If you want to restore the original folder name (`hotel-management-system`), you can simply move the folder back to its original state using the `mv` command.
+   
+   ```bash
+   mv client hotel-management-system
+   ```
+
+4. **Add the files back correctly using `git mv`:**
+   - Now that your folder is back to the original name, use the `git mv` command to rename the files properly, which will prevent Git from treating them as deletions and additions.
+   
+   ```bash
+   git mv hotel-management-system client
+   ```
+
+5. **Check the status again:**
+   - Run `git status` to verify that Git now recognizes the move properly and is not treating it as a deletion and addition.
+   
+   ```bash
+   git status
+   ```
+
+6. **Stage the changes:**
+   - Stage the files to prepare them for the next commit:
+   
+   ```bash
+   git add .
+   ```
+
+7. **Commit the changes with a clean message:**
+   - Commit the changes with a meaningful commit message, such as "Renamed project folder from `hotel-management-system` to `client`."
+   
+   ```bash
+   git commit -m "Renamed project folder from 'hotel-management-system' to 'client'"
+   ```
+
+8. **Push the changes:**
+   - Once you have committed your changes with the proper folder name and without the messy commit history, push them to the remote repository:
+   
+   ```bash
+   git push
+   ```
+
+### Additional Notes:
+
+- **`git reset HEAD~1`:** This command resets your last commit but leaves the changes in your working directory. It is helpful when you realize that you need to adjust something in the commit, such as folder names or file structures.
+  
+- **`git mv`:** This is the correct way to rename or move files and directories in Git. It helps Git track the changes as a "move" instead of a "delete and add" operation, which avoids unnecessary clutter in your commit history.
+
+- **Why it's important:** Renaming directories and files with `git mv` ensures that Git tracks the changes properly. If you manually rename folders or files without `git mv`, Git may treat the operation as separate delete and add operations, which will create unnecessary changes in your commit history.
+
+### In summary:
+
+If you've accidentally renamed a folder manually (without `git mv`), and you haven't pushed your changes yet, you can use `git reset HEAD~1` to undo the last commit, move the folder back to its original name, use `git mv` to rename the folder correctly, and then commit and push your changes. This ensures that the changes are properly tracked by Git, and your commit history remains clean and accurate.

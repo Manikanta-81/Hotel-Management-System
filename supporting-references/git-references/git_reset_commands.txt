@@ -1,0 +1,53 @@
+
+### Git Reset Commands Explained
+
+1. **git reset HEAD~1**:
+   - Resets the HEAD to the previous commit (before the latest one).
+   - Keeps changes in your working directory unstaged.
+
+   Command:
+   ```bash
+   git reset HEAD~1
+   ```
+
+2. **git reset --soft HEAD~1**:
+   - Similar to `git reset HEAD~1`, but keeps changes staged for the next commit.
+   
+   Command:
+   ```bash
+   git reset --soft HEAD~1
+   ```
+
+3. **git reset --mixed HEAD~1**:
+   - Resets the HEAD to the previous commit and removes changes from the staging area but leaves them in your working directory.
+
+   Command:
+   ```bash
+   git reset --mixed HEAD~1
+   ```
+
+4. **git reset --hard HEAD~1**:
+   - Resets the HEAD to the previous commit and discards changes in both the staging area and working directory.
+   - **Be cautious** as this permanently removes all changes.
+
+   Command:
+   ```bash
+   git reset --hard HEAD~1
+   ```
+
+5. **git reset --hard <commit_hash>**:
+   - Resets the HEAD to a specific commit using the commit hash and discards all changes after that commit.
+
+   Command:
+   ```bash
+   git reset --hard <commit_hash>
+   ```
+
+---
+
+### **Common Use Cases**:
+1. Undo the last commit: `git reset HEAD~1`
+2. Recover from mistakes without losing changes: `git reset --soft HEAD~1`
+3. Discard changes and reset to a previous commit: `git reset --hard <commit_hash>`
+4. Clean up commit history before pushing changes: `git reset --mixed HEAD~1`
+

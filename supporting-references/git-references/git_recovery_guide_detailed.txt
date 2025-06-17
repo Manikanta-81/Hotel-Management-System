@@ -1,0 +1,54 @@
+
+### Scenario: Renaming a Folder without `git mv` Command
+
+When you rename a folder (or file) without using `git mv`, Git may not track the changes properly. It might treat it as deleted from the original location and added in a new one, causing messy commit history with lots of unnecessary deletions and additions.
+
+Let's say you have renamed a folder (e.g., `hotel-management-system` to `client`) without using the `git mv` command, and you haven't pushed yet.
+
+### How to recover and clean up the commit history:
+
+1. **Step 1: Reset the last commit**
+   If you've already committed the changes but haven't pushed yet, you can use the following command to reset the commit and unstage the changes:
+
+   ```bash
+   git reset HEAD~1
+   ```
+   This command will remove the last commit, but the changes will still be present in your working directory. It "unstages" the changes, allowing you to fix the mistake.
+
+2. **Step 2: Rename the folder properly using `git mv`**
+   Now that the commit is reset, use the `git mv` command to rename the folder correctly:
+
+   ```bash
+   git mv hotel-management-system client
+   ```
+   This ensures that Git correctly tracks the renaming and avoids treating the changes as deletions and additions.
+
+3. **Step 3: Add and commit the changes properly**
+   After renaming the folder using `git mv`, add and commit the changes as follows:
+
+   ```bash
+   git add .
+   git commit -m "Renamed folder from hotel-management-system to client"
+   ```
+
+4. **Step 4: Push the changes to the repository**
+   After committing the changes, you can safely push to your GitHub repository:
+
+   ```bash
+   git push
+   ```
+
+   Now, the commit history will be clean, and the changes will be properly tracked by Git.
+
+### Explanation of Git Commands:
+
+- `git reset HEAD~1`: This command resets the last commit, effectively undoing it, but keeps the changes in your working directory. It's useful for cleaning up commit history when you've made a mistake.
+- `git mv <old_name> <new_name>`: This command tells Git to rename a file or folder. It tracks the rename correctly, so Git understands that it's not a deletion followed by an addition.
+- `git add .`: Adds all the changes in your working directory (including renaming) to the staging area, preparing them for commit.
+- `git commit -m "<message>"`: Commits the staged changes with a message, recording them in the commit history.
+- `git push`: Pushes the committed changes to the remote repository (like GitHub).
+
+### Conclusion:
+
+By following these steps, you can clean up your commit history after renaming folders without `git mv`. This will avoid messy commits and keep your repository organized.
+

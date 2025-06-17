@@ -1,0 +1,18 @@
+Hotel Management System
+
+Description: A system to manage hotel bookings, rooms, and customer information. Staff can manage room availability and bookings, while customers can book rooms and provide feedback.
+
+Key Features:
+
+User authentication (for customers and staff)
+CRUD operations for rooms and bookings
+Customer management
+Room availability and booking
+Feedback from customers
+Collections:
+
+Users: Stores user information (name, email, password, role - customer or staff)
+Customers: Stores customer details (user_id, address, phone) - 1-to-1 relationship with Users
+Rooms: Stores room details (room_number, type, price, status)
+Bookings: Stores booking information (room_id, customer_id, check_in_date, check_out_date) - 1-to-1 relationship with Rooms and Customers
+Feedback: Stores feedback (booking_id, rating, comments) - 1-to-1 relationship with Bookings

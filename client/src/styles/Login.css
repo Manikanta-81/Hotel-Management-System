@@ -1,0 +1,9 @@
+.login-page {
+  margin: 0;
+  padding: 0;
+}
+.login-page h1,
+.login-page p {
+  margin: 0;
+  padding: 0 10px; /* Adjust as needed for spacing */
+}

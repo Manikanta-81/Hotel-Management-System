@@ -1,0 +1,107 @@
+.contact-page {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .contact-header h1 {
+    font-size: 2.5rem;
+    color: #2a9d8f;
+  }
+  
+  .contact-header p {
+    font-size: 1.2rem;
+    color: #6c757d;
+  }
+  
+  .contact-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  
+  .contact-form-section, .contact-info-section {
+    width: 48%;
+  }
+  
+  .contact-form-section h2, .contact-info-section h2 {
+    font-size: 2rem;
+    color: #2a9d8f;
+    margin-bottom: 20px;
+  }
+  
+  .contact-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .contact-form label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .contact-form textarea {
+    resize: vertical;
+    height: 150px;
+  }
+  
+  .contact-form .submit-btn {
+    background-color: lightslategray;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .contact-form .submit-btn:hover {
+    background-color: #264e36;
+  }
+  
+  .contact-info-section p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .map-container {
+    margin-top: 20px;
+  }
+  
+  .chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .chat-widget button {
+    background-color: #2a9d8f;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chat-widget button:hover {
+    background-color: #264e36;
+  }

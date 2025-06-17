@@ -1,0 +1,98 @@
+Thunderclient to test
+
+// For Users root
+
+    http://localhost:80/users
+ 
+
+ POST - http://localhost:80/users/register-user - register user 
+
+ POST - http://localhost:80/users/login-user - login user
+ 
+
+ GET -http://localhost:80/users/get-all-users -get all users with basic information
+
+
+
+
+
+
+//For customers root
+
+http://localhost:80/customers/   - server.js
+
+
+POST  - http://localhost:80/customers/create-customer   - createCustomer
+
+
+GET  http://localhost:80/customers/getcustomers    - getallcustomers
+ 
+
+GET   http://localhost:80/customers/getcustomer/{obj_id of customer}
+
+GET   http://localhost:80/customers/getcustomer/6770c7792f17cfc0f05b0c3b
+
+
+
+// For Rooms root
+
+app.use("/rooms", roomRoutes);
+
+i.e 
+
+http://localhost:80/rooms 
+
+
+Post   http://localhost:80/rooms/create-room  - createRoom
+
+GET    http://localhost:80/rooms/get-all-rooms  - get all rooms
+
+
+
+GET          http://localhost:80/rooms/getSingleRoom/{roomId} 
+                        677d66d2f30a0a24a072639d 
+
+GET          http://localhost:80/rooms/getSingleRoom/677d66d2f30a0a24a072639d
+
+
+
+
+Bookings roomRoutes
+
+Root url --      http://localhost:80/bookings
+
+
+POST --- http://localhost:80/bookings/create-booking - createBooking
+
+
+GET        http://localhost:80/bookings/get-bookings - get all bookings
+
+router.put("/confirm-booking/:booking_id",authenticateToken, confirmBooking);
+
+
+GET    http://localhost:80/bookings/get-booking-by-id/:bookingId - get single booking using bookingId (id)
+
+
+PUT http://localhost:80/bookings/confirm-booking/:bookingId - confirm booking using bookingId (id)
+
+Feedback
+
+POST /feedback/add-feedback:
+URL:    http://localhost:80/feedback/add-feedback
+Purpose: To add feedback for a specific booking.
+
+GET /feedback/get-all-feedback:
+URL:    http://localhost:80/feedback/get-all-feedback
+Purpose: To get all feedback (useful for staff/admins).
+
+GET /feedback/getfeedback/:bookingId:
+URL:    http://localhost:80/feedback/getfeedback/:bookingId
+Purpose: To get feedback by a specific booking ID.
+
+
+
+Contact Us
+
+Post url to add contact us
+
+URL : http://localhost:80/contact/savecontact

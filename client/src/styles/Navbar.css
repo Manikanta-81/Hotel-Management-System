@@ -1,0 +1,17 @@
+nav {
+  background-color: lightslategrey;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-brand {
+  color: white;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: rgb(27, 94, 32);
+}
