@@ -1,4 +1,3 @@
-// Load environment variables from .env file
 require("dotenv").config();
 
 // const secretKey = process.env.JWT_SECRET;
@@ -31,7 +30,7 @@ const contactRoutes = require("./routes/contactRoutes");
 const connect = async () => {
   try {
     await mongoose.connect(
-      "mongodb+srv://Balajis1812:balaji123!@cluster0.xeoxr.mongodb.net/Hotel_Booking_System"
+      "mongodb+srv://Manikanta81:MAni%402002@cluster0.1we6e.mongodb.net/Stay-Hub"
     );
     console.log("Connected to Database of MongoDB");
   } catch (err) {
