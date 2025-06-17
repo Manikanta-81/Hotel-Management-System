@@ -67,9 +67,10 @@ app.use("/bookings", bookingRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/contact", contactRoutes);
 
-const PORT = 80;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log("Server is listening on port", PORT);
   console.log(`http://13.202.204.246`);
+
   connect();
 });
