@@ -234,15 +234,15 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 
 If you have any questions or feedback, feel free to reach out:
 
-- **GitHub**: [balajis183](https://github.com/balajis183)
 - **Email**: sbalaji2000s@gmail.com
+- **Email**: vaddimanikanta2002@gmail.com
 
 ---
 
 
 For more projects visit my github profile.
 ```bash
-https://github.com/balajis183
+https://github.com/Manikanta-81
 ```
 Thank you for exploring **StayHub**! 😊
 
