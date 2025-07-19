@@ -1,7 +1,7 @@
 const cron = require("node-cron");
 const RoomModel = require("../models/roomSchema");
 
-const timeLimit = 15;      // If reserved for more than 15 minutes, release the room
+const timeLimit = 15; // If reserved for more than 15 minutes, release the room
 
 // Cron job to run every 10 minutes
 cron.schedule("*/10 * * * *", async () => {
@@ -21,7 +21,9 @@ cron.schedule("*/10 * * * *", async () => {
             room.status = "Available"; // Update status to 'Available'
             room.reservedAt = null; // Clear reservedAt timestamp
             await room.save(); // Save changes
-            console.log(`✅ Room ${room.room_number} has been released as the user didn't confirmed the booking.`);
+            console.log(
+              `✅ Room ${room.room_number} has been released as the user didn't confirmed the booking.`
+            );
           }
         }
       }

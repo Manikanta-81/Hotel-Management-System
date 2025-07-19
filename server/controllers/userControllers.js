@@ -1,5 +1,3 @@
-// import user model
-
 const userModel = require("../models/userSchema");
 const customerModel = require("../models/customerSchema");
 const jwt = require("jsonwebtoken");
@@ -34,7 +32,7 @@ const createUser = async (req, res) => {
       "support@stayhub.com",
       "balaji@stayhub.com",
       "manikanta@stayhub.com",
-    ]; // List of predefined staff emails
+    ];
 
     let role = Roles.CUSTOMER; // Default role is CUSTOMER
 

@@ -1,5 +1,3 @@
-// import customer model
-
 const customerModel = require("../models/customerSchema");
 const User = require("../models/userSchema");
 
@@ -38,7 +36,7 @@ const createCustomer = async (req, res) => {
       contact,
       dob,
       address,
-      nationality:"Indian",
+      nationality: "Indian",
       status: "Active", // Default status is "Active"
     });
 

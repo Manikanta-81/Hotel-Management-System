@@ -5,7 +5,10 @@ function About() {
   return (
     <div>
       <Layout>
-        <section className="about-us-section py-5 bg-light  " style={{marginTop:"-4rem",marginBottom:"-4rem"}}>
+        <section
+          className="about-us-section py-5 bg-light  "
+          style={{ marginTop: "-4rem", marginBottom: "-4rem" }}
+        >
           <div className="container">
             <div className="text-center mb-5">
               <h1 className="display-4">About StayHub</h1>

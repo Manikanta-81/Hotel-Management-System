@@ -45,7 +45,6 @@ const Contact = () => {
         setTimeout(() => {
           toast.success("Your Message has been sent successfully!");
         }, 500);
-
       })
       .catch((error) => {
         console.log("Error", error);

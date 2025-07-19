@@ -27,10 +27,15 @@ function NavRoutes() {
           <Route path="/viewrooms/booking/:roomId" element={<RoomBooking />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/feedback/:bookingId" element={<Feedback/>} / >
-          <Route path="/viewrooms/:roomId/booking-confirm/:bookingId" element={<ConfirmBooking />} />
-          <Route path="/details/booking-confirmed/:bookingId" element={<BookingDetails />} />
-
+          <Route path="/feedback/:bookingId" element={<Feedback />} />
+          <Route
+            path="/viewrooms/:roomId/booking-confirm/:bookingId"
+            element={<ConfirmBooking />}
+          />
+          <Route
+            path="/details/booking-confirmed/:bookingId"
+            element={<BookingDetails />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

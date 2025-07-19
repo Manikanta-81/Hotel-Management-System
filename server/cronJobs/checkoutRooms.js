@@ -27,7 +27,9 @@ cron.schedule("*/15 * * * *", async () => {
         booking.status = "checkedOut";
         // await booking.save();
         await booking.save({ validateBeforeSave: false });
-        console.log(`✅ Booking ${booking._id} status updated to checkedOut as the user checkedOut date completed`);
+        console.log(
+          `✅ Booking ${booking._id} status updated to checkedOut as the user checkedOut date completed`
+        );
       }
     } else {
       console.log("⏳ No bookings to check out.");
@@ -36,7 +38,3 @@ cron.schedule("*/15 * * * *", async () => {
     console.error("❌ Error in checkout cron job:", error);
   }
 });
-
-
-
-

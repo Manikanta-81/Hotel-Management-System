@@ -71,7 +71,7 @@ function BookingDetails() {
               <h5 className="mb-1">
                 Booking ID: <strong>{bookingId}</strong>
               </h5>
-              <p className="mb-0" >
+              <p className="mb-0">
                 Congratulations! Your booking has been successfully confirmed.
                 Below are the final details of your reservation. Please verify
                 and save them for future reference.
@@ -241,7 +241,11 @@ function BookingDetails() {
 
               {/* Print Button */}
               <div className="text-center mt-4 card-footer w-100 ">
-                <button className="btn btn-primary " onClick={handlePrint} style={{fontFamily:"SF Pro Text"}}>
+                <button
+                  className="btn btn-primary "
+                  onClick={handlePrint}
+                  style={{ fontFamily: "SF Pro Text" }}
+                >
                   Print booking Details
                 </button>
               </div>
@@ -261,16 +265,31 @@ function BookingDetails() {
       <div className="d-flex justify-content-center mt-4">
         {/* Feedback Button inside Link */}
         <Link to={`/feedback/${bookingId}`} className="btn-link me-3">
-          <button className="btn btn-success" style={{fontFamily:"Sogoe UI"}}>Leave Feedback</button>
+          <button
+            className="btn btn-success"
+            style={{ fontFamily: "Sogoe UI" }}
+          >
+            Leave Feedback
+          </button>
         </Link>
 
         {/* Home Button inside Link */}
         <Link to="/" className="btn-link me-3">
-          <button className="btn btn-secondary" style={{fontFamily:"Sogoe UI"}}>Go to Home</button>
+          <button
+            className="btn btn-secondary"
+            style={{ fontFamily: "Sogoe UI" }}
+          >
+            Go to Home
+          </button>
         </Link>
 
         <Link to="/viewrooms" className="btn-link ">
-          <button className="btn btn-primary"style={{fontFamily:"SF Pro Text"}}>Book Another Room</button>
+          <button
+            className="btn btn-primary"
+            style={{ fontFamily: "SF Pro Text" }}
+          >
+            Book Another Room
+          </button>
         </Link>
       </div>
     </Layout>

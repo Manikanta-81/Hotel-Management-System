@@ -30,7 +30,7 @@ const createRoom = async (req, res) => {
       room_number,
       room_type,
       price,
-      status:status || "Available",
+      status: status || "Available",
       image,
       Ratings,
     });
@@ -70,8 +70,6 @@ const getAllRooms = async (req, res) => {
   }
 };
 
-// Get a room by ID
-// Get a room by ID
 const getRoomById = async (req, res) => {
   try {
     const roomId = req.params.id; // Extract room ID from request parameters
@@ -91,7 +89,5 @@ const getRoomById = async (req, res) => {
       .json({ message: "Error fetching room", error: error.message });
   }
 };
-
-
 
 module.exports = { createRoom, getAllRooms, getRoomById };

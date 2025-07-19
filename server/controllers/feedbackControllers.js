@@ -1,7 +1,6 @@
 const Feedback = require("../models/feedbackSchema");
-const Booking = require("../models/bookingSchema"); // Importing the Booking model for validation
+const Booking = require("../models/bookingSchema");
 
-// Add feedback for a specific booking
 const addFeedback = async (req, res) => {
   try {
     const {
@@ -14,7 +13,7 @@ const addFeedback = async (req, res) => {
       stay_purpose,
     } = req.body;
 
-    console.log("Received Feedback Data:", req.body); // Lo
+    console.log("Received Feedback Data:", req.body);
 
     // Validate if the booking exists
     const bookingExists = await Booking.findById(booking_id);

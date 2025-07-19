@@ -37,15 +37,11 @@ function ConfirmBooking() {
     }
 
     axiosInstance
-      .put(
-        `/bookings/confirm-booking/${bookingId}`,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Include token in headers
-          },
-        }
-      )
+      .put(`/bookings/confirm-booking/${bookingId}`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in headers
+        },
+      })
       .then((res) => {
         // Check for status codes and handle the response accordingly
         if (res.status === 404) {
