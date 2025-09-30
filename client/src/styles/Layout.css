@@ -1,0 +1,54 @@
+/* Layout Styles */
+
+.main-content {
+  width: 100%;
+  min-height: calc(100vh - 200px);
+}
+
+/* Responsive adjustments for different screen sizes */
+@media (max-width: 1200px) {
+  main {
+    padding-top: 3rem !important;
+  }
+}
+
+@media (max-width: 992px) {
+  main {
+    padding-top: 2.8rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-top: 2.5rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  main {
+    padding-top: 2.2rem !important;
+  }
+}
+
+/* Ensure proper spacing for fixed navbar */
+body {
+  padding-top: 0;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Container adjustments for better mobile experience */
+.container, .container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (max-width: 576px) {
+  .container, .container-fluid {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}

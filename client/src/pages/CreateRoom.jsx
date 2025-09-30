@@ -181,17 +181,21 @@ function CreateRoom() {
             </div>
 
             <div className="form-group  p-1">
-              <label htmlFor="image">Image</label>
+              <label htmlFor="image">Image URL</label>
               <input
-                type="file"
-                accept="image/**"
+                type="text"
                 name="image"
                 id="placeimage"
                 className="form-control"
+                placeholder="Enter image URL (e.g., /images/cozyroom.png)"
+                value={image}
                 onChange={(event) => {
-                  setImage(event.target.files[0]);
+                  setImage(event.target.value);
                 }}
               />
+              <small className="form-text text-muted">
+                Available images: cozyroom.png, luxury suite.png, insideroom.png, Beachview.png, Cityview.png, Buildingview.png, coolview.png, nightview.png
+              </small>
             </div>
 
             <div className="form-group d-flex justify-content-center ">

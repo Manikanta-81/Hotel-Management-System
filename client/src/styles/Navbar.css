@@ -1,17 +1,216 @@
-nav {
-  background-color: lightslategrey;
+/* Professional Navbar Styles */
+.professional-navbar {
+  background: #ffffff;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #e9ecef;
   margin: 0;
-  padding: 0;
+  padding: 0.4rem 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .navbar-brand {
-  color: white;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.brand-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: -0.5px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.brand-text:hover {
+  color: #3498db;
+  transform: scale(1.02);
 }
 
 .nav-link {
-  color: white;
+  color: #2c3e50 !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  padding: 0.3rem 0.8rem !important;
+  border-radius: 6px;
+  margin: 0 0.1rem;
+  position: relative;
 }
 
 .nav-link:hover {
-  color: rgb(27, 94, 32);
+  color: #3498db !important;
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #3498db;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+  width: 80%;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.navbar-nav:first-child {
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar-nav:last-child {
+  margin-left: auto;
+}
+
+.navbar-toggler {
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  color: #2c3e50;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+  border-color: #3498db;
+}
+
+.navbar-toggler:hover {
+  background: #e9ecef;
+  border-color: #3498db;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2844, 62, 80, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Professional Button Styles */
+.btn-login {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  color: white !important;
+  border: none;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+  letter-spacing: 0.3px;
+}
+
+.btn-login:hover {
+  background: linear-gradient(135deg, #2980b9 0%, #1f5f8b 100%);
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-logout {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white !important;
+  border: none;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(231, 76, 60, 0.3);
+  letter-spacing: 0.3px;
+}
+
+.btn-logout:hover {
+  background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .professional-navbar {
+    padding: 0.4rem 0;
+  }
+  
+  .brand-text {
+    font-size: 1.2rem;
+  }
+  
+  .navbar-nav {
+    text-align: center;
+    margin-top: 0.8rem;
+  }
+  
+  .navbar-nav:first-child {
+    flex: none;
+    justify-content: center;
+  }
+  
+  .navbar-nav:last-child {
+    margin-left: 0;
+    margin-top: 0.4rem;
+  }
+  
+  .nav-link {
+    margin: 0.1rem 0;
+    padding: 0.3rem 0.8rem !important;
+  }
+  
+  .btn-login,
+  .btn-logout {
+    padding: 0.3rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .professional-navbar {
+    padding: 0.3rem 0;
+  }
+  
+  .brand-text {
+    font-size: 1.1rem;
+  }
+  
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem !important;
+  }
+  
+  .btn-login,
+  .btn-logout {
+    padding: 0.25rem 0.8rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Smooth animations */
+.navbar-collapse {
+  transition: all 0.3s ease;
+}
+
+/* Container adjustments */
+.container {
+  max-width: 1200px;
+}
+
+/* Professional scroll effect */
+.professional-navbar.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
 }

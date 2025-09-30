@@ -28,11 +28,11 @@ function Navbar() {
     <div>
       <ToastContainer position="top-center" />
 
-      <nav className="navbar navbar-expand-lg navbar-light ">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            StayHub
-          </Link>
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top professional-navbar">
+        <div className="container">
+          <div className="navbar-brand">
+            <span className="brand-text">StayHub</span>
+          </div>
           <button
             className="navbar-toggler"
             type="button"
@@ -45,7 +45,7 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto text-white">
+            <ul className="navbar-nav mx-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/home">
                   Home
@@ -61,29 +61,31 @@ function Navbar() {
                   Contact Us
                 </Link>
               </li>
-
+              {token && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/viewrooms">
+                    Book Rooms
+                  </Link>
+                </li>
+              )}
+            </ul>
+            
+            <ul className="navbar-nav">
               {token ? (
                 <li className="nav-item">
                   <button
-                    className="btn btn-outline-success text-white nav-link"
+                    className="btn btn-logout"
                     onClick={handleLogout}
                   >
                     Logout
                   </button>
                 </li>
               ) : (
-                <>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/login">
-                      Login
-                    </Link>
-                  </li>
-                  {/* <li className="nav-item">
-                    <Link className="nav-link" to="/signup">
-                      Sign up
-                    </Link>
-                  </li> */}
-                </>
+                <li className="nav-item">
+                  <Link className="btn btn-login" to="/login">
+                    Login
+                  </Link>
+                </li>
               )}
               {/* <li className="nav-item">
                 <Link className="nav-link" to="/customer">

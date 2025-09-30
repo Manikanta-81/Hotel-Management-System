@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import { Carousel } from "react-bootstrap";
+import "../styles/Home.css";
 
 function Home() {
   // Hotel images with additional data
@@ -66,69 +67,68 @@ function Home() {
 
   return (
     <Layout>
-      {/* Hero Section with Bootstrap Carousel */}
-      <section
-        className="hero-section position-relative"
-        style={{ marginTop: "-3.5rem", marginBottom: "3rem" }}
-      >
-        <Carousel fade interval={1000}>
+      {/* Hero Section with Full-Width Carousel */}
+      <section className="hero-section position-relative" style={{ marginTop: "-5rem" }}>
+        <Carousel fade interval={3000} className="full-width-carousel">
           {carouselImages.map((image, index) => (
             <Carousel.Item key={index}>
-              <Link to="/">
+              <div className="carousel-image-container">
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="d-block w-100"
-                  style={{
-                    width: "100%",
-                    height: "600px",
-                    objectFit: "cover",
-                    margin: " 0 auto", // center the image if width exceeds the container
-                  }}
+                  className="carousel-image"
                 />
-              </Link>
+                <div className="carousel-overlay"></div>
+              </div>
             </Carousel.Item>
           ))}
         </Carousel>
 
-        {/* Text stays fixed */}
-        <div
-          className="hero-text position-absolute top-50 start-50 translate-middle text-center text-white"
-          style={{
-            zIndex: 10, // Ensure it stays on top of the carousel
-          }}
-        >
-          <h1 className="display-4">Welcome to StayHub</h1>
-          <p className="lead">Experience luxury and comfort at its finest.</p>
-
-          {token ? (
-            <Link to="/viewrooms" className="btn btn-primary btn-lg mt-3">
-              Book Now
-            </Link>
-          ) : (
-            <Link to="/login" className="btn btn-primary btn-lg mt-3">
-             Login to Book Rooms
-            </Link>
-          )}
+        {/* Hero Text Overlay */}
+        <div className="hero-content">
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-12 col-md-10 col-lg-8 text-center">
+                <h1 className="hero-title">Welcome to StayHub</h1>
+                <p className="hero-subtitle">Experience luxury and comfort at its finest</p>
+                {token ? (
+                  <Link to="/viewrooms" className="btn btn-primary btn-lg hero-btn">
+                    <i className="bi bi-calendar-check me-2"></i>Book Now
+                  </Link>
+                ) : (
+                  <Link to="/login" className="btn btn-primary btn-lg hero-btn">
+                    <i className="bi bi-box-arrow-in-right me-2"></i>Login to Book Rooms
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Gallery Section - Displaying Hotel Images Only */}
-      <section className="container mt-5">
-        <h3 className="text-center mb-4">Explore Our Hotels</h3>
-        <div className="row g-4" style={{ marginBottom: "5rem" }}>
-          {hotelImages.map((hotel, index) => (
-            <div className="col-12 col-sm-6 col-md-4" key={index}>
-              <div className="card h-100 shadow-sm">
-                <img
-                  src={hotel.src}
-                  alt={hotel.alt}
-                  className="card-img-top"
-                  style={{ borderRadius: "8px" }}
-                />
+      {/* Gallery Section */}
+      <section className="gallery-section">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-lg-10">
+              <h2 className="section-title text-center mb-5">Explore Our Hotels</h2>
+              <div className="row g-4">
+                {hotelImages.map((hotel, index) => (
+                  <div className="col-12 col-sm-6 col-md-4 col-lg-4" key={index}>
+                    <div className="hotel-card">
+                      <div className="hotel-image-container">
+                        <img
+                          src={hotel.src}
+                          alt={hotel.alt}
+                          className="hotel-image"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </section>
     </Layout>

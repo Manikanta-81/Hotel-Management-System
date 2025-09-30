@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import axiosInstance from "../utils/axiosInstance";
+import "../styles/Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -59,76 +60,77 @@ function Login() {
   }
 
   return (
-    <div>
-      <Layout>
-        <div
-          className="container card shadow-lg  w-50  rounded-4"
-          style={{ border: "5px solid lightslategray" }}
-        >
-          <h1 className="text-center mb-3">Log in </h1>
-          <form onSubmit={handleSubmit}>
-            {/* Email  */}
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                className="form-control"
-                placeholder="Enter your Email address"
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-                required
-              />
-            </div>
-            {/* password  */}
-            <div className="form-group mt-3">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="form-control"
-                placeholder="Enter your Login password"
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-                required
-              />
-            </div>
+    <Layout>
+      <div className="login-page">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div className="login-card">
+                <div className="login-header">
+                  <h1 className="login-title">Welcome Back</h1>
+                  <p className="login-subtitle">Sign in to your StayHub account</p>
+                </div>
 
-            {/* setMessage */}
+                <form onSubmit={handleSubmit} className="login-form">
+                  <div className="form-group">
+                    <label htmlFor="email" className="form-label">
+                      <i className="bi bi-envelope me-2"></i>Email Address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="form-control"
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      required
+                    />
+                  </div>
 
-            {message && (
-              <div className="alert alert-success bg-success text-white mt-3 p-2 ">
-                {message}
+                  <div className="form-group">
+                    <label htmlFor="password" className="form-label">
+                      <i className="bi bi-lock me-2"></i>Password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      className="form-control"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      required
+                    />
+                  </div>
+
+                  {message && (
+                    <div className="alert alert-danger">
+                      <i className="bi bi-exclamation-triangle me-2"></i>
+                      {message}
+                    </div>
+                  )}
+
+                  <button type="submit" className="btn btn-login">
+                    <i className="bi bi-box-arrow-in-right me-2"></i>
+                    Sign In
+                  </button>
+
+                  <div className="login-footer">
+                    <p className="text-center">
+                      Don't have an account?{" "}
+                      <Link to="/signup" className="signup-link">
+                        Create one here
+                      </Link>
+                    </p>
+                  </div>
+                </form>
               </div>
-            )}
-
-            {/* Registration link for new users */}
-            <div className="text-center mt-3">
-              <p className="text-success">
-                Not registered yet?{" "}
-                <Link to={`/signup`} className="text-primary">
-                  Create an account here
-                </Link>
-                .
-              </p>
             </div>
-
-            <div className="form-group d-flex justify-content-center mt-2">
-              <button
-                type="submit"
-                className="btn btn-primary p-3 m-3 rounded-3"
-              >
-                Login
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
-      </Layout>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

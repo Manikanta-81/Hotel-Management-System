@@ -91,7 +91,7 @@ function BookingDetails() {
                   <div className="col-12">
                     <h3 className="card-title fw-bold text-success mb-3 d-flex align-items-center">
                       <i className="bi bi-building me-2"></i>{" "}
-                      {details.room_id.hotel_name}
+                      {details.room_id?.hotel_name || "N/A"}
                     </h3>
                   </div>
                 </div>
@@ -100,14 +100,14 @@ function BookingDetails() {
                 <div className="row">
                   <div className="col-md-6">
                     <p>
-                      <strong>Address:</strong> {details.room_id.address}
+                      <strong>Address:</strong> {details.room_id?.address || "N/A"}
                     </p>
                   </div>
                   <div className="col-md-6">
                     <p>
                       <strong>Ratings(out of 5):</strong>{" "}
                       <span className="text-warning">
-                        {details.room_id.Ratings}{" "}
+                        {details.room_id?.Ratings || "N/A"}{" "}
                         <i className="bi bi-star-fill"></i>
                       </span>
                     </p>
@@ -124,30 +124,30 @@ function BookingDetails() {
                   <div className="col-md-6">
                     <p>
                       <strong>Room Number:</strong>{" "}
-                      {details.room_id.room_number}
+                      {details.room_id?.room_number || "N/A"}
                     </p>
                     <p>
-                      <strong>Room Type:</strong> {details.room_id.room_type}
+                      <strong>Room Type:</strong> {details.room_id?.room_type || "N/A"}
                     </p>
                   </div>
                   <div className="col-md-6">
                     <p>
-                      <strong>Price per Night:</strong> ₹{details.room_id.price}
+                      <strong>Price per Night:</strong> ₹{details.room_id?.price || "N/A"}
                     </p>
                     <p>
                       <strong>Room Status: </strong>
                       <span
                         className={`badge fs-6 px-3 py-2 ${
-                          details.room_id.status === "Available"
+                          details.room_id?.status === "Available"
                             ? "bg-success"
-                            : details.room_id.status === "Reserved"
+                            : details.room_id?.status === "Reserved"
                             ? "bg-warning text-dark"
-                            : details.room_id.status === "Booked"
+                            : details.room_id?.status === "Booked"
                             ? "bg-success"
                             : "bg-secondary"
                         }`}
                       >
-                        {details.room_id.status}
+                        {details.room_id?.status || "Unknown"}
                       </span>
                     </p>
                   </div>
@@ -162,21 +162,21 @@ function BookingDetails() {
                   <div className="col-md-6">
                     <p>
                       <strong>Check-in Date:</strong>{" "}
-                      {new Date(details.check_in_date).toLocaleDateString()}
+                      {details?.check_in_date ? new Date(details.check_in_date).toLocaleDateString() : "N/A"}
                     </p>
                     <p>
                       <strong>Check-out Date:</strong>{" "}
-                      {new Date(details.check_out_date).toLocaleDateString()}
+                      {details?.check_out_date ? new Date(details.check_out_date).toLocaleDateString() : "N/A"}
                     </p>
                   </div>
                   <div className="col-md-6 ">
                     <p>
                       <strong>Booking Date :</strong>{" "}
-                      {new Date(details.createdAt).toLocaleDateString()}
+                      {details?.createdAt ? new Date(details.createdAt).toLocaleDateString() : "N/A"}
                     </p>
                     <p>
                       <strong>Booking Time :</strong>{" "}
-                      {new Date(details.createdAt).toLocaleTimeString()}
+                      {details?.createdAt ? new Date(details.createdAt).toLocaleTimeString() : "N/A"}
                     </p>
                   </div>
 
@@ -186,7 +186,7 @@ function BookingDetails() {
                     <p>
                       <strong>Total Price: </strong>
                       <span className="badge bg-success fs-6 px-3 py-2">
-                        ₹{details.price}
+                        ₹{details?.price || "N/A"}
                       </span>
                     </p>
                   </div>
@@ -195,12 +195,12 @@ function BookingDetails() {
                       <strong> Booking Status:</strong>{" "}
                       <span
                         className={`badge fs-6 px-3 py-2 ${
-                          details.status === "confirmed"
+                          details?.status === "confirmed"
                             ? "bg-success"
                             : "bg-warning text-dark"
                         }`}
                       >
-                        {details.status}
+                        {details?.status || "Unknown"}
                       </span>
                     </p>
                   </div>
@@ -214,26 +214,26 @@ function BookingDetails() {
                 <div className="row">
                   <div className="col-md-6">
                     <p>
-                      <strong>Name:</strong> {details.customer_id.user_id.name}
+                      <strong>Name:</strong> {details.customer_id?.user_id?.name || "N/A"}
                     </p>
                     <p>
                       <strong>Email:</strong>{" "}
-                      {details.customer_id.user_id.email}
+                      {details.customer_id?.user_id?.email || "N/A"}
                     </p>
                     <p>
-                      <strong>Gender:</strong> {details.customer_id.gender}
+                      <strong>Gender:</strong> {details.customer_id?.gender || "N/A"}
                     </p>
                   </div>
                   <div className="col-md-6">
                     <p>
-                      <strong>Contact:</strong> {details.customer_id.contact}
+                      <strong>Contact:</strong> {details.customer_id?.contact || "N/A"}
                     </p>
                     <p>
                       <strong>Date of Birth:</strong>{" "}
-                      {new Date(details.customer_id.dob).toLocaleDateString()}
+                      {details.customer_id?.dob ? new Date(details.customer_id.dob).toLocaleDateString() : "N/A"}
                     </p>
                     <p>
-                      <strong>Address:</strong> {details.customer_id.address}
+                      <strong>Address:</strong> {details.customer_id?.address || "N/A"}
                     </p>
                   </div>
                 </div>

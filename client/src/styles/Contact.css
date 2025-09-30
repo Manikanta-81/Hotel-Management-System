@@ -1,7 +1,7 @@
 .contact-page {
     font-family: Arial, sans-serif;
     color: #333;
-    padding: 40px;
+    padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -12,19 +12,20 @@
   }
   
   .contact-header h1 {
-    font-size: 2.5rem;
-    color: #2a9d8f;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
   }
   
   .contact-header p {
-    font-size: 1.2rem;
-    color: #6c757d;
+    font-size: 1rem;
+    color: #666;
   }
   
   .contact-content {
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 30px;
   }
   
   .contact-form-section, .contact-info-section {
@@ -32,8 +33,8 @@
   }
   
   .contact-form-section h2, .contact-info-section h2 {
-    font-size: 2rem;
-    color: #2a9d8f;
+    font-size: 1.5rem;
+    color: #333;
     margin-bottom: 20px;
   }
   
@@ -62,18 +63,19 @@
   }
   
   .contact-form .submit-btn {
-    background-color: lightslategray;
+    background-color: #007bff;
     color: white;
     padding: 12px 20px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    transition: background-color 0.3s ease;
   }
   
   .contact-form .submit-btn:hover {
-    background-color: #264e36;
+    background-color: #0056b3;
   }
   
   .contact-info-section p {
@@ -85,23 +87,83 @@
     margin-top: 20px;
   }
   
-  .chat-widget {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-  }
-  
-  .chat-widget button {
-    background-color: #2a9d8f;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
+  .map-container iframe {
+    width: 100%;
+    height: 300px;
     border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
   }
   
-  .chat-widget button:hover {
-    background-color: #264e36;
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .contact-page {
+      padding: 15px;
+    }
+    
+    .contact-header h1 {
+      font-size: 1.5rem;
+    }
+    
+    .contact-header p {
+      font-size: 0.9rem;
+    }
+    
+    .contact-content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .contact-form-section, .contact-info-section {
+      width: 100%;
+    }
+    
+    .contact-form-section h2, .contact-info-section h2 {
+      font-size: 1.3rem;
+    }
+    
+    .contact-form input, .contact-form textarea {
+      padding: 8px;
+      font-size: 0.9rem;
+    }
+    
+    .contact-form .submit-btn {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+    
+    .map-container iframe {
+      height: 250px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .contact-page {
+      padding: 10px;
+    }
+    
+    .contact-header h1 {
+      font-size: 1.3rem;
+    }
+    
+    .contact-header p {
+      font-size: 0.85rem;
+    }
+    
+    .contact-form-section h2, .contact-info-section h2 {
+      font-size: 1.2rem;
+    }
+    
+    .contact-form input, .contact-form textarea {
+      padding: 7px;
+      font-size: 0.85rem;
+    }
+    
+    .contact-form .submit-btn {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
+    
+    .map-container iframe {
+      height: 200px;
+    }
   }

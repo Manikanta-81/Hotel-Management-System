@@ -23,21 +23,32 @@ const contactRoutes = require("./routes/contactRoutes");
 // MongoDB connection
 const connect = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://Manikanta81:MAni%402002@cluster0.1we6e.mongodb.net/Stay-Hub"
-    );
+    const mongoUrl = process.env.MONGODB_URL || "mongodb+srv://Manikanta81:9618863286MANI@cluster0.1we6e.mongodb.net/Hotel-management-system";
+    await mongoose.connect(mongoUrl);
     console.log("Connected to MongoDB");
+    
+    // Start cron jobs after successful MongoDB connection
+    require("./cronJobs/releaseReservedRooms");
+    require("./cronJobs/checkoutRooms");
+    console.log("✅ Cron jobs started successfully");
   } catch (err) {
     console.log("MongoDB connection error:", err.message);
   }
 };
 
-// CORS for local development
+// CORS configuration for deployment
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000", 
+      "http://localhost:3001", 
+      "http://localhost:5000",
+      "https://your-vercel-app.vercel.app", // Replace with your Vercel URL
+      "https://your-render-app.onrender.com" // Replace with your Render URL
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
   })
 );
 
@@ -45,12 +56,27 @@ app.use(
 app.use(bodyparser.json());
 
 // Cron jobs
-require("./cronJobs/releaseReservedRooms");
-require("./cronJobs/checkoutRooms");
+// Cron jobs will be started after MongoDB connection
+// require("./cronJobs/releaseReservedRooms");
+// require("./cronJobs/checkoutRooms");
 
 // Root route
 app.get("/", (req, res) => {
-  res.send("Welcome to the Hotel Management System (Local Server Running)");
+  res.json({
+    message: "Hotel Management System API",
+    status: "Server is running",
+    environment: process.env.NODE_ENV || "development",
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Health check endpoint for deployment platforms
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
 });
 
 // API routes
@@ -62,8 +88,11 @@ app.use("/feedback", feedbackRoutes);
 app.use("/contact", contactRoutes);
 
 // Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+const PORT = process.env.PORT || 5000;
+const HOST = process.env.HOST || '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+  console.log(`✅ Server running on http://${HOST}:${PORT}`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
   connect();
 });

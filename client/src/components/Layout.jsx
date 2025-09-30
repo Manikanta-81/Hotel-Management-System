@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import "../styles/Layout.css";
 
 function Layout({ children }) {
   return (
@@ -18,15 +19,10 @@ function Layout({ children }) {
         style={{
           flex: 1,
           backgroundColor: "white",
-          // backgroundColor: "#f1f8e9",
-          // backgroundImage: "url('/images/background_3.jpg')",
-          backgroundSize: "cover", // Ensures the image covers the entire area
-          backgroundRepeat: "no-repeat", // Prevents image repetition
-          backgroundPosition: "center", // Centers the image
-          paddingTop: "2rem",
+          paddingTop: "3.5rem", // Account for fixed navbar
         }}
       >
-        <div style={{ marginBottom: "3rem", marginTop: "1.5rem" }}>
+        <div className="main-content">
           {children}
         </div>
       </main>

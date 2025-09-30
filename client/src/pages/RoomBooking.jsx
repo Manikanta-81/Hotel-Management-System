@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { useNavigate, useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axiosInstance from "../utils/axiosInstance";
+import "../styles/RoomBooking.css";
 
 function RoomBooking() {
   const { roomId } = useParams(); // Get room ID from the route params
@@ -98,80 +99,126 @@ function RoomBooking() {
 
   return (
     <Layout>
-      <div className="container w-75">
-        <h2 className="text-center">Room Booking</h2>
-        {roomDetails ? (
-          <div className="card my-4">
-            <div className="card-body">
-              <h3 className="card-title fw-light">{roomDetails.hotel_name}</h3>
-              <p className="card-text">
-                <strong>Room Number:</strong> {roomDetails.room_number}
-              </p>
-              <p className="card-text">
-                <strong>Address:</strong> {roomDetails.address}
-              </p>
-              <p className="card-text">
-                <strong>Type:</strong> {roomDetails.room_type}
-              </p>
-              <p className="card-text">
-                <strong>Price:</strong> ₹{roomDetails.price} / night
-              </p>
-              <p className="card-text">
-                <strong>Status:</strong>{" "}
-                <span
-                  className={`badge ${
-                    roomDetails.status === "Available"
-                      ? "bg-success"
-                      : "bg-danger"
-                  }`}
-                >
-                  {roomDetails.status}
-                </span>
-              </p>
-              <p className="card-text">
-                <strong>Ratings:</strong>{" "}
-                {roomDetails.Ratings ? `${roomDetails.Ratings}/5` : "Not Rated"}
-              </p>
+      <div className="booking-page">
+        <div className="container">
+          <div className="booking-header">
+            <h1 className="booking-title">Book Your Room</h1>
+            <p className="booking-subtitle">Complete your reservation in just a few steps</p>
+          </div>
+
+          {roomDetails ? (
+            <div className="row">
+              <div className="col-12 col-lg-8">
+                <div className="room-details-card">
+                  <div className="room-image-section">
+                    <img
+                      src={roomDetails.image || "/images/cozyroom.png"}
+                      alt={roomDetails.hotel_name}
+                      className="room-detail-image"
+                      onError={(e) => {
+                        e.target.src = "/images/cozyroom.png";
+                      }}
+                    />
+                    <div className="room-status-overlay">
+                      <span
+                        className={`status-badge ${
+                          roomDetails.status === "Available"
+                            ? "status-available"
+                            : "status-unavailable"
+                        }`}
+                      >
+                        {roomDetails.status}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="room-info-section">
+                    <h2 className="hotel-name">{roomDetails.hotel_name}</h2>
+                    <div className="room-details-grid">
+                      <div className="detail-item">
+                        <i className="bi bi-door-open"></i>
+                        <span className="detail-label">Room Number</span>
+                        <span className="detail-value">{roomDetails.room_number}</span>
+                      </div>
+                      <div className="detail-item">
+                        <i className="bi bi-geo-alt"></i>
+                        <span className="detail-label">Address</span>
+                        <span className="detail-value">{roomDetails.address}</span>
+                      </div>
+                      <div className="detail-item">
+                        <i className="bi bi-house"></i>
+                        <span className="detail-label">Room Type</span>
+                        <span className="detail-value">{roomDetails.room_type}</span>
+                      </div>
+                      <div className="detail-item">
+                        <i className="bi bi-star"></i>
+                        <span className="detail-label">Rating</span>
+                        <span className="detail-value">
+                          {roomDetails.Ratings ? `${roomDetails.Ratings}/5` : "Not Rated"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 col-lg-4">
+                <div className="booking-form-card">
+                  <div className="price-section">
+                    <div className="price-display">
+                      <span className="currency">₹</span>
+                      <span className="amount">{roomDetails.price}</span>
+                      <span className="period">/ night</span>
+                    </div>
+                    <p className="price-note">Price per night</p>
+                  </div>
+
+                  <form onSubmit={handleFormSubmit} className="booking-form">
+                    <div className="form-group">
+                      <label htmlFor="check_in_date" className="form-label">
+                        <i className="bi bi-calendar-check me-2"></i>Check-in Date
+                      </label>
+                      <input
+                        type="date"
+                        id="check_in_date"
+                        className="form-control"
+                        value={check_in_date}
+                        onChange={(e) => setCheckInDate(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="check_out_date" className="form-label">
+                        <i className="bi bi-calendar-x me-2"></i>Check-out Date
+                      </label>
+                      <input
+                        type="date"
+                        id="check_out_date"
+                        className="form-control"
+                        value={check_out_date}
+                        onChange={(e) => setCheckOutDate(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <button type="submit" className="btn-book-room">
+                      <i className="bi bi-calendar-check me-2"></i>
+                      Book Room Now
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
-          </div>
-        ) : (
-          <p>Loading room details...</p>
-        )}
-
-        {/* Room booking form */}
-        <form onSubmit={handleFormSubmit} className="my-4">
-          <div className="mb-3">
-            <label htmlFor="check_in_date" className="form-label">
-              Check-in Date
-            </label>
-            <input
-              type="date"
-              id="check_in_date"
-              className="form-control"
-              value={check_in_date}
-              onChange={(e) => setCheckInDate(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="check_out_date" className="form-label">
-              Check-out Date
-            </label>
-            <input
-              type="date"
-              id="check_out_date"
-              className="form-control"
-              value={check_out_date}
-              onChange={(e) => setCheckOutDate(e.target.value)}
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary w-100">
-            Book Room
-          </button>
-        </form>
+          ) : (
+            <div className="loading-section">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+              <p className="loading-text">Loading room details...</p>
+            </div>
+          )}
+        </div>
       </div>
     </Layout>
   );

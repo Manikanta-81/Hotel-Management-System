@@ -53,7 +53,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <div className="contact-page" style={{ marginTop: "-3.5rem" }}>
+      <div className="contact-page">
         <div className="contact-header">
           <h1>Contact Us</h1>
           <p>We're here to assist you. Feel free to reach out!</p>

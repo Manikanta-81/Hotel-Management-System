@@ -1,10 +1,17 @@
 const cron = require("node-cron");
+const mongoose = require("mongoose");
 const BookingModel = require("../models/bookingSchema");
 const RoomModel = require("../models/roomSchema");
 
 // Cron job to update room status, booking status for every 15 minutes
 cron.schedule("*/15 * * * *", async () => {
   try {
+    // Check if MongoDB is connected
+    if (mongoose.connection.readyState !== 1) {
+      console.log("⏳ MongoDB not connected, skipping cron job");
+      return;
+    }
+
     const now = new Date();
 
     // Find confirmed bookings where checkout date has passed

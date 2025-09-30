@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import axiosInstance from "../utils/axiosInstance";
+import "../styles/ViewRooms.css";
 
 function ViewRooms() {
   const [rooms, setRooms] = useState([]);
@@ -85,24 +86,18 @@ function ViewRooms() {
       <div className="container py-4">
         <div className="row g-4">
           {filteredRooms.map((room) => (
-            <div key={room._id} className="col-12 col-sm-6 col-md-4">
-              <div className="card h-100">
-                <div className="card-body">
-                  <h2 className="card-title  fw-light">{room.hotel_name}</h2>
-                  <p className="card-text">
-                    <strong>Address:</strong> {room.address}
-                  </p>
-                  <p className="card-text">
-                    <strong>Room Number:</strong> {room.room_number}
-                  </p>
-                  <p className="card-text">
-                    <strong>Type:</strong> {room.room_type}
-                  </p>
-                  <p className="card-text">
-                    <strong>Price:</strong> ₹{room.price} / night
-                  </p>
-                  <p className="card-text">
-                    <strong>Status:</strong>{" "}
+            <div key={room._id} className="col-12 col-sm-6 col-md-6 col-lg-4">
+              <div className="room-card h-100">
+                <div className="room-image-container">
+                  <img
+                    src={room.image || "/images/cozyroom.png"}
+                    alt={room.hotel_name}
+                    className="room-image"
+                    onError={(e) => {
+                      e.target.src = "/images/cozyroom.png";
+                    }}
+                  />
+                  <div className="room-status-badge">
                     <span
                       className={`badge ${
                         room.status === "Available" ? "bg-success" : "bg-danger"
@@ -110,22 +105,39 @@ function ViewRooms() {
                     >
                       {room.status}
                     </span>
-                  </p>
-                  <p className="card-text">
-                    <strong>Ratings:</strong>{" "}
-                    {room.Ratings ? `${room.Ratings}/5` : "Not Rated"}
-                  </p>
+                  </div>
                 </div>
-                <div className="card-footer text-center">
-                  {/* <Link to={`/viewrooms/booking/${room._id}`}> */}
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleRoomClick(room)}
-                    // disabled={room.status !== "Available"} // Disable if not available
-                  >
-                    Book Now
-                  </button>
-                  {/* </Link> */}
+                <div className="room-content">
+                  <h3 className="room-title">{room.hotel_name}</h3>
+                  <div className="room-details">
+                    <p className="room-address">
+                      <i className="bi bi-geo-alt me-2"></i>
+                      {room.address}
+                    </p>
+                    <p className="room-info">
+                      <i className="bi bi-door-open me-2"></i>
+                      Room {room.room_number} • {room.room_type}
+                    </p>
+                    <div className="room-price-rating">
+                      <div className="price">
+                        <strong>₹{room.price}</strong>
+                        <span className="price-unit">/ night</span>
+                      </div>
+                      <div className="rating">
+                        <i className="bi bi-star-fill text-warning"></i>
+                        <span>{room.Ratings || "N/A"}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="room-actions">
+                    <button
+                      className="btn btn-primary w-100"
+                      onClick={() => handleRoomClick(room)}
+                    >
+                      <i className="bi bi-calendar-check me-2"></i>
+                      Book Now
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,59 +150,66 @@ function ViewRooms() {
   return (
     <div>
       <Layout>
-        {/* <h1>Home page </h1> */}
-        <h3 className="fw-semibold text-center text-success p-2 fw-light">
-          {" "}
-          Book your room in the Available hotels.
-        </h3>
+        <div className="page-header">
+          <h1 className="page-title">Available Rooms</h1>
+          <p className="page-subtitle">Book your perfect stay with us</p>
+        </div>
 
         <div className="container py-4">
-          <div className="row g-4 ">
-            <div className="col-12 col-sm-6 col-md-4">
-              <label className="fw-semibold mb-1">Sort by Availability:</label>
-              <select
-                className="form-select"
-                value={availabilityFilter}
-                onChange={(e) => setAvailabilityFilter(e.target.value)}
-              >
-                <option value="All">All Rooms</option>
-                <option value="Available">Available Rooms</option>
-                <option value="Booked">Booked Rooms</option>
-                <option value="Maintenance">Rooms under Maintenance</option>
-              </select>
-            </div>
+          <div className="filters-section">
+            <div className="row g-3">
+              <div className="col-12 col-sm-6 col-md-4">
+                <label className="filter-label">
+                  <i className="bi bi-funnel me-2"></i>Availability
+                </label>
+                <select
+                  className="form-select filter-select"
+                  value={availabilityFilter}
+                  onChange={(e) => setAvailabilityFilter(e.target.value)}
+                >
+                  <option value="All">All Rooms</option>
+                  <option value="Available">Available Rooms</option>
+                  <option value="Booked">Booked Rooms</option>
+                  <option value="Maintenance">Under Maintenance</option>
+                </select>
+              </div>
 
-            <div className="col-12 col-sm-6 col-md-4 ">
-              <label className="fw-semibold mb-1">Sort by Price:</label>
-              <select
-                className="form-select"
-                value={priceSort}
-                onChange={(e) => setPriceSort(e.target.value)}
-              >
-                <option value="">None</option>
-                <option value="low-to-high">Low to High</option>
-                <option value="high-to-low">High to Low</option>
-              </select>
-            </div>
+              <div className="col-12 col-sm-6 col-md-4">
+                <label className="filter-label">
+                  <i className="bi bi-currency-rupee me-2"></i>Price
+                </label>
+                <select
+                  className="form-select filter-select"
+                  value={priceSort}
+                  onChange={(e) => setPriceSort(e.target.value)}
+                >
+                  <option value="">No Sorting</option>
+                  <option value="low-to-high">Low to High</option>
+                  <option value="high-to-low">High to Low</option>
+                </select>
+              </div>
 
-            <div className="col-12 col-sm-6 col-md-4 ">
-              <label className="fw-semibold mb-1">Sort by Ratings:</label>
-              <select
-                className="form-select"
-                value={ratingsSort}
-                onChange={(e) => setRatingsSort(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="3">3 & above</option>
-                <option value="4">4 & above</option>
-                <option value="5">5 stars only</option>
-              </select>
+              <div className="col-12 col-sm-6 col-md-4">
+                <label className="filter-label">
+                  <i className="bi bi-star me-2"></i>Ratings
+                </label>
+                <select
+                  className="form-select filter-select"
+                  value={ratingsSort}
+                  onChange={(e) => setRatingsSort(e.target.value)}
+                >
+                  <option value="">All Ratings</option>
+                  <option value="3">3+ Stars</option>
+                  <option value="4">4+ Stars</option>
+                  <option value="5">5 Stars Only</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* fetch the data from the data into diplay/view rooms page  */}
-        <div className="d-flex m-2">{displayRooms()}</div>
+        {/* Display rooms */}
+        {displayRooms()}
       </Layout>
       <ToastContainer position="top-center" autoClose={3000} />
     </div>

@@ -1,4 +1,5 @@
 const cron = require("node-cron");
+const mongoose = require("mongoose");
 const RoomModel = require("../models/roomSchema");
 
 const timeLimit = 15; // If reserved for more than 15 minutes, release the room
@@ -6,6 +7,12 @@ const timeLimit = 15; // If reserved for more than 15 minutes, release the room
 // Cron job to run every 10 minutes
 cron.schedule("*/10 * * * *", async () => {
   try {
+    // Check if MongoDB is connected
+    if (mongoose.connection.readyState !== 1) {
+      console.log("⏳ MongoDB not connected, skipping cron job");
+      return;
+    }
+
     const now = new Date();
 
     // Find all rooms with status 'Reserved'

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
+import "../styles/Signup.css";
 // import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function Signup() {
@@ -57,7 +58,7 @@ function Signup() {
       })
 
       .catch((err) => {
-        if (err.response.status === 409) {
+        if (err.response && err.response.status === 409) {
           setMessage("User already exists. Please try logging in."); // Specific error
         } else if (
           err.response &&
@@ -73,90 +74,110 @@ function Signup() {
   }
 
   return (
-    <div>
-      <Layout>
-        <div className="container rounded-4 card shadow-lg w-50  "style={{border: "5px solid lightslategray" }}>
-          <h1 className="text-center mb-3">Sign Up</h1>
-          <form onSubmit={handleSubmit}>
-            {/* Name  */} 
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                className="form-control"
-                placeholder="Enter your name"
-                aria-label="Full Name"
-                onChange={(event) => {
-                  setName(event.target.value);
-                }}
-                required
-              />
-            </div>
-            {/* Email  */}
-            <div className="form-group mt-3">
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                className="form-control"
-                placeholder="Enter your Email address"
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-                required
-              />
-            </div>
-            {/* password  */}
-            <div className="form-group mt-3">
-              <label htmlFor="password"> Set Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="form-control"
-                placeholder="Enter your password"
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-                required
-              />
-            </div>
-            {/* confirmPassword */}
-            <div className="form-group mt-3">
-              <label htmlFor="confirmPassword"> Confirm Password</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                className="form-control"
-                placeholder="Confirm your password"
-                onChange={(event) => {
-                  setConfirmPassword(event.target.value);
-                }}
-                required
-              />
-            </div>
-            {/* Error message if email format not matched also password check */}
-            {message && (
-              <div className="alert alert-success bg-success text-white mt-2 p-2 ">
-                {message}
-              </div>
-            )}
+    <Layout>
+      <div className="signup-page">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div className="signup-card">
+                <div className="signup-header">
+                  <h1 className="signup-title">Create Account</h1>
+                  <p className="signup-subtitle">Join StayHub and start your journey</p>
+                </div>
 
-            {/* submit button  */}
-            <div className="form-group d-flex justify-content-center ">
-              <input
-                type="submit"
-                className="btn btn-primary p-3 m-3  rounded-4 "
-              />
+                <form onSubmit={handleSubmit} className="signup-form">
+                  <div className="form-group">
+                    <label htmlFor="name" className="form-label">
+                      <i className="bi bi-person me-2"></i>Full Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      className="form-control"
+                      placeholder="Enter your full name"
+                      value={name}
+                      onChange={(event) => setName(event.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="email" className="form-label">
+                      <i className="bi bi-envelope me-2"></i>Email Address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="form-control"
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="password" className="form-label">
+                      <i className="bi bi-lock me-2"></i>Password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      className="form-control"
+                      placeholder="Create a strong password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      required
+                    />
+                    <small className="form-text">Password must be at least 6 characters long</small>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="confirmPassword" className="form-label">
+                      <i className="bi bi-lock-fill me-2"></i>Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      className="form-control"
+                      placeholder="Confirm your password"
+                      value={confirmPassword}
+                      onChange={(event) => setConfirmPassword(event.target.value)}
+                      required
+                    />
+                  </div>
+
+                  {message && (
+                    <div className="alert alert-danger">
+                      <i className="bi bi-exclamation-triangle me-2"></i>
+                      {message}
+                    </div>
+                  )}
+
+                  <button type="submit" className="btn btn-signup">
+                    <i className="bi bi-person-plus me-2"></i>
+                    Create Account
+                  </button>
+
+                  <div className="signup-footer">
+                    <p className="text-center">
+                      Already have an account?{" "}
+                      <Link to="/login" className="login-link">
+                        Sign in here
+                      </Link>
+                    </p>
+                  </div>
+                </form>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
-      </Layout>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

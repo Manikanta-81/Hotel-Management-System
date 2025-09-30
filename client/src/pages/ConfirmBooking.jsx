@@ -88,7 +88,7 @@ function ConfirmBooking() {
               <div className="card-body">
                 <h3 className="card-title fw-light text-primary mb-3 d-flex align-items-center">
                   <i className="bi bi-building me-2"></i> {/* Bootstrap Icon */}
-                  {bookingDetails.room_id.hotel_name}
+                  {bookingDetails.room_id?.hotel_name || "N/A"}
                 </h3>
 
                 {/* Room and Booking Info */}
@@ -97,11 +97,11 @@ function ConfirmBooking() {
                   <div className="col-md-6">
                     <p className="card-text">
                       <strong>Room Number:</strong>{" "}
-                      {bookingDetails.room_id.room_number}
+                      {bookingDetails.room_id?.room_number || "N/A"}
                     </p>
                     <p className="card-text">
                       <strong>Room Price:</strong> ₹
-                      {bookingDetails.room_id.price}
+                      {bookingDetails.room_id?.price || "N/A"}
                     </p>
                   </div>
 
@@ -109,15 +109,15 @@ function ConfirmBooking() {
                   <div className="col-md-6">
                     <p className="card-text">
                       <strong>Check-in Date:</strong>{" "}
-                      {new Date(
+                      {bookingDetails?.check_in_date ? new Date(
                         bookingDetails.check_in_date
-                      ).toLocaleDateString()}
+                      ).toLocaleDateString() : "N/A"}
                     </p>
                     <p className="card-text">
                       <strong>Check-out Date:</strong>{" "}
-                      {new Date(
+                      {bookingDetails?.check_out_date ? new Date(
                         bookingDetails.check_out_date
-                      ).toLocaleDateString()}
+                      ).toLocaleDateString() : "N/A"}
                     </p>
                   </div>
                 </div>
@@ -130,7 +130,7 @@ function ConfirmBooking() {
                     <p className="card-text">
                       <strong>Total Price:</strong>{" "}
                       <span className="badge bg-primary fs-6  text-light">
-                        ₹{bookingDetails.price}
+                        ₹{bookingDetails?.price || "N/A"}
                       </span>
                     </p>
                   </div>
@@ -148,31 +148,31 @@ function ConfirmBooking() {
                     <div className="col-md-6">
                       <p className="card-text">
                         <strong>Customer Name:</strong>{" "}
-                        {bookingDetails.customer_id.user_id.name}
+                        {bookingDetails.customer_id?.user_id?.name || "N/A"}
                       </p>
                       <p className="card-text">
                         <strong>Customer Email:</strong>{" "}
-                        {bookingDetails.customer_id.user_id.email}
+                        {bookingDetails.customer_id?.user_id?.email || "N/A"}
                       </p>
                       <p className="card-text">
                         <strong>Contact:</strong>{" "}
-                        {bookingDetails.customer_id.contact}
+                        {bookingDetails.customer_id?.contact || "N/A"}
                       </p>
                     </div>
                     <div className="col-md-6">
                       <p className="card-text">
                         <strong>Address:</strong>{" "}
-                        {bookingDetails.customer_id.address}
+                        {bookingDetails.customer_id?.address || "N/A"}
                       </p>
                       <p className="card-text">
                         <strong>Gender:</strong>{" "}
-                        {bookingDetails.customer_id.gender}
+                        {bookingDetails.customer_id?.gender || "N/A"}
                       </p>
                       <p className="card-text">
                         <strong>Date of Birth:</strong>{" "}
-                        {new Date(
+                        {bookingDetails.customer_id?.dob ? new Date(
                           bookingDetails.customer_id.dob
-                        ).toLocaleDateString()}
+                        ).toLocaleDateString() : "N/A"}
                       </p>
                     </div>
                   </div>
@@ -190,16 +190,16 @@ function ConfirmBooking() {
                         <strong>Room Status: </strong>
                         <span
                           className={`badge fs-6 ${
-                            bookingDetails.room_id.status === "Available"
+                            bookingDetails.room_id?.status === "Available"
                               ? "bg-success"
-                              : bookingDetails.room_id.status === "Reserved"
+                              : bookingDetails.room_id?.status === "Reserved"
                               ? "bg-warning text-dark"
-                              : bookingDetails.room_id.status === "Booked"
+                              : bookingDetails.room_id?.status === "Booked"
                               ? "bg-success"
                               : "bg-secondary"
                           }`}
                         >
-                          {bookingDetails.room_id.status}
+                          {bookingDetails.room_id?.status || "Unknown"}
                         </span>
                       </p>
                     </div>
@@ -209,12 +209,12 @@ function ConfirmBooking() {
                         <strong> Booking Status:</strong>{" "}
                         <span
                           className={`badge fs-6 ${
-                            bookingDetails.status === "confirmed"
+                            bookingDetails?.status === "confirmed"
                               ? "bg-success"
                               : "bg-warning text-dark"
                           }`}
                         >
-                          {bookingDetails.status}
+                          {bookingDetails?.status || "Unknown"}
                         </span>
                       </p>
                     </div>
