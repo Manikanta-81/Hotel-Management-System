@@ -4,7 +4,7 @@ import axios from 'axios';
 const getBaseURL = () => {
   // For production deployment
   if (process.env.NODE_ENV === 'production') {
-    return process.env.REACT_APP_API_URL || 'https://your-render-app.onrender.com';
+    return process.env.REACT_APP_API_URL || 'https://hotel-management-system-txxk.onrender.com';
   }
   // For development
   return 'http://localhost:5000';

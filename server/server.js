@@ -43,8 +43,7 @@ app.use(
       "http://localhost:3000", 
       "http://localhost:3001", 
       "http://localhost:5000",
-      "https://your-vercel-app.vercel.app", // Replace with your Vercel URL
-      "https://your-render-app.onrender.com" // Replace with your Render URL
+      "https://hotel-management-system-txxk.onrender.com" // Render backend URL
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
